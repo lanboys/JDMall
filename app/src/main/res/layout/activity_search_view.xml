@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white" >
+
+    <!-- 头部 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FAFAFA"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/goback"
+            android:onClick="goBack" />
+
+        <EditText
+            android:id="@+id/search_et"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:hint="请输入关键词"
+            android:background="@drawable/search_et_shap"
+            android:paddingLeft="5dp" />
+        
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/search_et_shap"
+            android:onClick="searchProduct"
+            android:text="搜索" />
+        
+    </LinearLayout>
+
+    <include layout="@layout/divider_layout" />
+	
+    <ListView
+        android:id="@+id/search_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="#0000"
+        android:scrollbars="none" />
+    
+    <include 
+        android:id="@+id/null_view"
+        layout="@layout/null_view"
+        android:visibility="gone" />
+
+</LinearLayout>

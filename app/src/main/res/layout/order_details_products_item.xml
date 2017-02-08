@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp" >
+        
+        <com.loopj.android.image.SmartImageView 
+            android:id="@+id/p_icon_iv"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="4dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/search_et_shap"  />
+        
+        <TextView 
+            android:id="@+id/p_name_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:ellipsize="end"
+            android:layout_toRightOf="@id/p_icon_iv"
+            android:layout_alignTop="@id/p_icon_iv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"  />
+        
+        <TextView 
+            android:id="@+id/p_buycount_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/p_name_iv"
+            android:layout_below="@id/p_name_iv"
+            android:layout_marginTop="8dp"
+            android:textColor="#999B9E"  />
+        
+        <TextView 
+            android:id="@+id/p_price_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/p_buycount_iv"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:textColor="#F00"
+            android:textSize="18sp"  />
+        
+    </RelativeLayout>
+
+</LinearLayout>

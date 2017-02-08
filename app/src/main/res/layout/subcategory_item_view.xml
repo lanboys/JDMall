@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="60dp" >
+
+        <TextView
+            android:id="@+id/child_castegory_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textSize="13sp" />
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:text="排行榜 >"
+            android:textSize="13sp" />
+
+        <GridView
+            android:id="@+id/child_castegory_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/child_castegory_title"
+            android:background="#FFF"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="3"
+            android:scrollbars="none" />
+    </RelativeLayout>
+
+</RelativeLayout>

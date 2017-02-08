@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/container" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#272A39"
+        android:gravity="center"
+        android:text="支付宝支付"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="交易金额: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/pay_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#272A39"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <include layout="@layout/divider_layout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/order_desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="63dp"
+            android:textColor="#F888"
+            android:text="订单信息: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/order_desc_val_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/order_desc_tv"
+            android:layout_alignTop="@id/order_desc_tv"
+            android:textColor="#F888"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/deal_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#F888"
+            android:text="交易类型: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/deal_type_val_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/deal_type_tv"
+            android:textColor="#F888"
+            android:text="担保交易 "
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/deal_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#F888"
+            android:text="创建时间: "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/deal_time_val_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#F888"
+            android:layout_toRightOf="@id/deal_time_tv"
+            android:textSize="14sp" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/deal_no_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#F888"
+            android:text="交易号:    "
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/deal_no_val_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#F888"
+            android:layout_toRightOf="@id/deal_no_tv"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/alipay_btn_bg"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:onClick="payClick"
+        android:gravity="center"
+        android:text="立即付款"
+        android:textSize="18sp" />
+
+</LinearLayout>

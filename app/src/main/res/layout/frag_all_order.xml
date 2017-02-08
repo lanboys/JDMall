@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F2F5"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/all_order_null_view" 
+        layout="@layout/null_view"
+        android:visibility="gone" />
+
+    <com.m520it.jdmall.ui.xlv.XListView
+        android:id="@+id/all_order_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:cacheColorHint="#0000"
+        android:divider="@null"
+        android:dividerHeight="8dp"
+        android:listSelector="#0000"
+        android:scrollbars="none"
+        android:visibility="gone" />
+
+</LinearLayout>
