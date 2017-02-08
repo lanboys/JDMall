@@ -114,6 +114,7 @@ public class HomeModule extends BaseFragmentModule
                     public void onError(Throwable e) {
                         listener.onError(action, e);
                         log.e("onError():加载秒杀信息失败  " + e.getLocalizedMessage());
+                        log.e("onError():加载秒杀信息失败  " + e.getLocalizedMessage());
                     }
 
                     @Override
