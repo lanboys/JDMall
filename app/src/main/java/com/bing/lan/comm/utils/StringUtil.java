@@ -21,19 +21,7 @@ public class StringUtil {
     public final static String UTF_8 = "utf-8";
     private static final LogUtil log = LogUtil.getLogUtil(StringUtil.class, LogUtil.LOG_INFO);
 
-    public static String MD5(String str) {
-        String key;
-        try {
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(str.getBytes());
-            byte[] bytes = digest.digest();
-            key = bytesToHexString(bytes);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            key = String.valueOf(str.hashCode());
-        }
-        return key;
-    }
+
 
     public static String bytesToHexString(byte[] bytes) {
         StringBuilder sb = new StringBuilder();

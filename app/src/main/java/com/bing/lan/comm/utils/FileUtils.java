@@ -119,7 +119,8 @@ public class FileUtils {
         if (createDirs(path)) {
             return path;
         } else {
-            throw new RuntimeException("directory <" + path + "> can't be created");
+            return path;
+            // throw new RuntimeException("directory <" + path + "> can't be created");
         }
     }
 

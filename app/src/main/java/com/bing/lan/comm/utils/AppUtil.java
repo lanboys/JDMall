@@ -75,11 +75,11 @@ public class AppUtil {
     }
 
     //    public static Object getGlobal(String key, Object defaultValue) {
-//        Object va = sCacheMap.get(key);
-//        if (va == null)
-//            return defaultValue;
-//        return va;
-//    }
+    //        Object va = sCacheMap.get(key);
+    //        if (va == null)
+    //            return defaultValue;
+    //        return va;
+    //    }
 
     public static <T> T getGlobal(String key) {
         return getGlobal(key, null);
@@ -136,7 +136,6 @@ public class AppUtil {
     public static String getPackageName() {
         return getAppContext().getPackageName();
     }
-
 
     public static String getCacheDir() {
         return FileUtils.getCacheDir();
@@ -209,6 +208,21 @@ public class AppUtil {
         return dip;
     }
 
+    //获得状态栏的高度
+    public static int getStatusHeight() {
+        int statusHeight = -1;
+        try {
+            Class clazz = Class.forName("com.android.internal.R$dimen");
+            Object object = clazz.newInstance();
+            int height = Integer.parseInt(clazz.getField("status_bar_height")
+                    .get(object).toString());
+            statusHeight = getAppContext().getResources().getDimensionPixelSize(height);
+        } catch (Exception e) {
+            log.e("getStatusHeight():  " + e.getLocalizedMessage());
+        }
+        return statusHeight;
+    }
+
     public static void RunApp(String packageName) {
         PackageInfo pi;
         try {
@@ -237,20 +251,6 @@ public class AppUtil {
         }
     }
 
-    public static int getStatusHeight(Context context) {
-        int statusHeight = -1;
-        try {
-            Class clazz = Class.forName("com.android.internal.R$dimen");
-            Object object = clazz.newInstance();
-            int height = Integer.parseInt(clazz.getField("status_bar_height")
-                    .get(object).toString());
-            statusHeight = context.getResources().getDimensionPixelSize(height);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return statusHeight;
-    }
-
     public static int getAppVersion(Context context) {
         try {
             PackageInfo pi = context.getPackageManager().getPackageInfo(
@@ -267,9 +267,9 @@ public class AppUtil {
     }
 
     public static Intent createShareIntent(String shareTitle,
-                                           String detailTitle,
-                                           String msgText,
-                                           File img) {
+            String detailTitle,
+            String msgText,
+            File img) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         if (img == null || TextUtils.isEmpty(img.getAbsolutePath())) {
             intent.setType("text/plain");
