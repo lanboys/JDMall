@@ -1,17 +1,18 @@
 package com.bing.lan.jdmall.ui.home;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.bing.lan.comm.base.mvp.fragment.BaseFragment;
 import com.bing.lan.comm.di.FragmentComponent;
+import com.bing.lan.comm.utils.FixedViewUtil;
 import com.bing.lan.comm.view.HorizontalListView;
 import com.bing.lan.jdmall.R;
+import com.bing.lan.jdmall.adapter.RecommandAdapter;
 import com.bing.lan.jdmall.adapter.SecondKillAdapter;
+import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -19,7 +20,6 @@ import com.youth.banner.loader.ImageLoader;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  *
@@ -31,8 +31,11 @@ public class HomeFragment extends BaseFragment<IHomeContract.IHomePresenter>
     Banner mBanner;
     @BindView(R.id.horizon_listview)
     HorizontalListView mSecondKillLv;
+    @BindView(R.id.recommend_gv)
+    GridView mRecommandGv;
 
     private SecondKillAdapter mSecondKillAdapter;
+    private RecommandAdapter mRecommandAdapter;
 
     @Override
     protected int getLayoutResId() {
@@ -52,7 +55,14 @@ public class HomeFragment extends BaseFragment<IHomeContract.IHomePresenter>
 
     private void init() {
         initListView();
+        initGridView();
         initBanner();
+    }
+
+    private void initGridView() {
+        mRecommandAdapter = new RecommandAdapter(getActivity());
+        mRecommandGv.setAdapter(mRecommandAdapter);
+
     }
 
     private void initListView() {
@@ -77,8 +87,16 @@ public class HomeFragment extends BaseFragment<IHomeContract.IHomePresenter>
     public void updateSecKill(List<SecKillResultBean.SecKillInfoBean.RowsBean> rowsBeen) {
         mSecondKillAdapter.setDatas(rowsBeen);
         mSecondKillAdapter.notifyDataSetChanged();
-
     }
+
+    @Override
+    public void updateGetYourLike(List<GetYourLikeResultBean.GetYourLikeInfoBean.RowsBean> rowsBeen) {
+        mRecommandAdapter.setDatas(rowsBeen);
+        mRecommandAdapter.notifyDataSetChanged();
+        //必须在加载数据后进行测量
+        FixedViewUtil.setGridViewHeightBasedOnChildren(mRecommandGv, 2);
+    }
+
     @Override
     public void updateBanner(List<String> imageUrls) {
         mBanner.setImages(imageUrls);
@@ -90,11 +108,4 @@ public class HomeFragment extends BaseFragment<IHomeContract.IHomePresenter>
         mBanner.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 }
