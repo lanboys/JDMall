@@ -63,6 +63,7 @@ public class CategoryFragment extends BaseFragment<ICategoryContract.ICategoryPr
 
     /**
      * 给ScrollView添加子View
+     * 
      */
     private void addView() {
         View view;

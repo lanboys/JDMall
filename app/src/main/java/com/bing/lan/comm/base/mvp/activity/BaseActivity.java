@@ -1,5 +1,6 @@
 package com.bing.lan.comm.base.mvp.activity;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -49,7 +50,6 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //透明状态栏
-        requestTranslucentStatus();
         initTranslucentStatus();
         //初始化布局
         initView();
@@ -59,40 +59,70 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
         requestPermissions();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mViewBind != null) {
+            mViewBind.unbind();
+            mViewBind = null;
+        }
+        //解绑
+        if (mPresenter != null) {
+            mPresenter.onDetachView();
+        }
+
+        AppUtil.MemoryLeakCheck(this);
+    }
+
     /**
      * 请求状态栏透明
      */
-    protected void requestTranslucentStatus() {
-        isTranslucentStatus = true;
+    protected boolean isTranslucentStatus() {
+        return true;
     }
 
     /**
      * 请求沉浸式
      */
-    protected void requestImmersion() {
-        isImmersion = true;
+    protected boolean isImmersion() {
+        // isImmersion = true;
+        return false;
     }
 
     private void initTranslucentStatus() {
 
-        if (!isTranslucentStatus)
+        if (!isTranslucentStatus())
             return;
-        //透明状态栏
+
+        //借用沉浸式来实现透明状态栏
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            // getWindow().setStatusBarColor(Color.TRANSPARENT);
+            //1.设置界面布局全屏
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE  //具体不知道什么用
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY     //实现触摸显示状态栏.导航栏
+                            // | View.SYSTEM_UI_FLAG_FULLSCREEN //隐藏状态栏
+                            // | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION  //隐藏导航栏
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN     //将界面伸到状态栏下面,不隐藏状态栏
+                    // | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION //将界面伸到导航栏下面,不隐藏导航栏
+            );
+
+            //2.将StatusBar颜色改为透明(注意不是系统StatusBar,系统的在21时,默认为透明了)
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
             // getWindow().setStatusBarColor(Color.BLACK);
             return;
         }
-
+        //透明状态栏
         if (Build.VERSION.SDK_INT >= 19) {
 
-            // api 19 以上 时, 实现 灰色透明(21),半透明(19), 界面伸到状态栏下面,
-            // 但是在21 中,系统默认是透明的状态栏,并且 在状态栏下面添加了一层 view,
-            // 导致界面看起来并没有伸到状态栏下面
+            // api 19  1.系统StatusBar渐变半透明
+            //         2.界面伸到系统StatusBar下面
+
+            // api 21  1.系统StatusBar灰色透明(类似沉浸式效果颜色)
+            //         2.隐藏非系统StatusBar(不会更改颜色)
+            //         3.故,界面伸到系统StatusBar下面
+            //         4.非全透明,故用上面的方法实现
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
@@ -101,16 +131,11 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
     }
 
     private void initImmersion(boolean hasFocus) {
-        if (!isImmersion)
+        if (!isImmersion())
             return;
         //必须在这个方法中请求,否则从其他app跳转过来后,沉浸式效果就消失了
-        //api 沉浸式在19 可以实现, 状态栏透明 只能在21 实现, 19只能实现半透明的状态栏
+        // 系统StatusBar 灰色透明 ,自动隐藏,轻触就显示出来
         if (hasFocus && Build.VERSION.SDK_INT >= 19) {
-
-            //这里设置还是能看到蓝色影子
-            // getWindow().setStatusBarColor(Color.TRANSPARENT);
-            // getWindow().setNavigationBarColor(Color.TRANSPARENT);
-            //
             View decorView = getWindow().getDecorView();
             decorView.setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE  //具体不知道什么用
@@ -132,22 +157,6 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         initImmersion(hasFocus);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (mViewBind != null) {
-            mViewBind.unbind();
-            mViewBind = null;
-        }
-        //解绑
-        if (mPresenter != null) {
-            mPresenter.onDetachView();
-        }
-
-        AppUtil.MemoryLeakCheck(this);
     }
 
     protected void initView() {

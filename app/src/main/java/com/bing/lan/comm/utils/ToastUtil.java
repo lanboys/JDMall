@@ -1,43 +1,35 @@
 package com.bing.lan.comm.utils;
 
-import android.content.Context;
-import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.app.Activity;
 import android.widget.Toast;
 
-/**
- * @author 赵坤
- * @email artzok@163.com
- */
 public class ToastUtil {
-    private static Toast textToast;
-    private static Toast iconToast;
 
-    public static void show(Context context, String msg) {
-        if (textToast == null) {
-            textToast = Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT);
+    private static Toast toast;
+
+    public static void showToast(final Activity act, final String msg) {
+        //获取当前线程
+        String nowThreadName = Thread.currentThread().getName();
+        //如果为主线程
+        if ("main".equals(nowThreadName)) {
+            thisToast(act, msg);
+
+            //如果为子线程
         } else {
-            textToast.setText(msg);
+            act.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    thisToast(act, msg);
+                }
+            });
         }
-        textToast.show();
     }
 
-    public static void show(Context context, String msg, int iconResId) {
-        String tag = "toast_image";
-        if (iconToast == null) {
-            iconToast = Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT);
-            // icon image view
-            ImageView image = new ImageView(context.getApplicationContext());
-            image.setImageResource(iconResId);
-            image.setTag(tag);
-            // add icon
-            ViewGroup group = (ViewGroup) iconToast.getView();
-            group.addView(image, 0);
-        } else {
-            iconToast.setText(msg);
-            ImageView image = (ImageView) iconToast.getView().findViewWithTag(tag);
-            image.setImageResource(iconResId);
+    public static void thisToast(Activity act, final String msg) {
+        if (toast == null) {
+            toast = Toast.makeText(act, msg, Toast.LENGTH_SHORT);
         }
-        iconToast.show();
+        toast.setText(msg);
+        toast.show();
     }
 }
