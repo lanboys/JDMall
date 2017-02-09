@@ -40,7 +40,6 @@ public class HomeFragment extends BaseFragment<IHomeContract.IHomePresenter>
     @Override
     protected int getLayoutResId() {
         return R.layout.fragment_home;
-
     }
 
     @Override
