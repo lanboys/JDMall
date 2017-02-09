@@ -30,6 +30,7 @@ public class LoginModule extends BaseActivityModule implements ILoginContract.IL
 
     @Override
     public void login(final int action, String username, String psd, final IBaseContract.OnDataChangerListener listener) {
+
         mApiService.login(username, psd)
                 .filter(new Func1<LoginResultBean, Boolean>() {
                     @Override

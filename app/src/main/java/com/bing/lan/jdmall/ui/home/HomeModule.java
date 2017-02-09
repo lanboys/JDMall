@@ -5,6 +5,7 @@ import com.bing.lan.comm.api.ApiService;
 import com.bing.lan.comm.base.mvp.IBaseContract;
 import com.bing.lan.comm.base.mvp.fragment.BaseFragmentModule;
 import com.bing.lan.jdmall.bean.BannerResultBean;
+import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class HomeModule extends BaseFragmentModule
                     @Override
                     public void onNext(List<String> data) {
                         listener.onSuccess(action, data);
-                        log.d("onNext(): " + data.size());
+                        log.d("onNext(): 轮播图数量" + data.size());
                     }
 
                     @Override
@@ -107,19 +108,61 @@ public class HomeModule extends BaseFragmentModule
                     @Override
                     public void onNext(List<SecKillResultBean.SecKillInfoBean.RowsBean> rowsBeen) {
                         listener.onSuccess(action, rowsBeen);
-                        log.d("onNext(): " + rowsBeen.size());
+                        log.d("onNext(): 秒杀信息数量" + rowsBeen.size());
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         listener.onError(action, e);
                         log.e("onError():加载秒杀信息失败  " + e.getLocalizedMessage());
-                        log.e("onError():加载秒杀信息失败  " + e.getLocalizedMessage());
                     }
 
                     @Override
                     public void onCompleted() {
                         log.i("onCompleted(): 加载秒杀信息完成");
+                    }
+                });
+    }
+
+    @Override
+    public void loadGetYourLike(final int action, final IBaseContract.OnDataChangerListener listener) {
+        mApiService.loadGetYourLike()
+                .filter(new Func1<GetYourLikeResultBean, Boolean>() {
+                    @Override
+                    public Boolean call(GetYourLikeResultBean getYourLikeResultBean) {
+                        int total = getYourLikeResultBean.getResult().getTotal();
+                        if (total > 0) {
+                            return true;
+                        } else {
+                            // 此处抛出的异常也会走onError
+                            throw new RuntimeException(getYourLikeResultBean.getErrorMsg() + "猜你喜欢数量为零");
+                        }
+                    }
+                })
+                .map(new Func1<GetYourLikeResultBean, List<GetYourLikeResultBean.GetYourLikeInfoBean.RowsBean>>() {
+                    @Override
+                    public List<GetYourLikeResultBean.GetYourLikeInfoBean.RowsBean> call(GetYourLikeResultBean getYourLikeResultBean) {
+                        return getYourLikeResultBean.getResult().getRows();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<GetYourLikeResultBean.GetYourLikeInfoBean.RowsBean>>() {
+                    @Override
+                    public void onNext(List<GetYourLikeResultBean.GetYourLikeInfoBean.RowsBean> rowsBeen) {
+                        listener.onSuccess(action, rowsBeen);
+                        log.d("onNext():猜你喜欢信息数量 " + rowsBeen.size());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        listener.onError(action, e);
+                        log.e("onError():加载猜你喜欢信息失败  " + e.getLocalizedMessage());
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        log.i("onCompleted(): 加载猜你喜欢信息完成");
                     }
                 });
     }

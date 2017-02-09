@@ -1,6 +1,7 @@
 package com.bing.lan.comm.api;
 
 import com.bing.lan.jdmall.bean.BannerResultBean;
+import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.LoginResultBean;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
 
@@ -19,9 +20,7 @@ import rx.Observable;
 
 public interface ApiService {
 
-
     String BASE_URL = "http://mall.520it.com/";
-
 
     /*访问全路径API并返回原生数据*/
     @GET
@@ -33,20 +32,22 @@ public interface ApiService {
             @QueryMap Map<String, String> map
     );
 
-
-//    @POST("login")
-//    Observable<LoginResultBean> getLoginResult(@Body LoginParamsBean loginParamsBean);
+    //    @POST("login")
+    //    Observable<LoginResultBean> getLoginResult(@Body LoginParamsBean loginParamsBean);
 
     @FormUrlEncoded
     @POST("login")
     Observable<LoginResultBean> login(@Field("username") String username,
-                                      @Field("pwd") String pwd);
+            @Field("pwd") String pwd);
 
     @GET("banner")
     Observable<BannerResultBean> loadBanner(@Query("adKind") int adKind);
 
     @GET("seckill")
-    Observable<SecKillResultBean> loadSecKill( );
+    Observable<SecKillResultBean> loadSecKill();
+
+    @GET("getYourFav")
+    Observable<GetYourLikeResultBean> loadGetYourLike();
 
     // @GET("home")
     // Call<ResponseBody> getUrl(@Query("index") long index);
@@ -58,7 +59,6 @@ public interface ApiService {
     // @GET("{home}")
     // Observable<HomeInfoBean> getHomeInfo(@Path("home") String home, @Query("index") int index);
     // //http://192.168.196.2:8080/GooglePlayServer/home?index=0
-
 
     // /*获得指定id的长评论*/
     // @GET("4/story/{id}/long-comments/{userId}")

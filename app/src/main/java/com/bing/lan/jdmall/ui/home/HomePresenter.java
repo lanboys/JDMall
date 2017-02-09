@@ -4,6 +4,7 @@ import android.widget.ImageView;
 
 import com.bing.lan.comm.base.mvp.fragment.BaseFragmentPresenter;
 import com.bing.lan.comm.view.LoadPageView;
+import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class HomePresenter extends
 
     private static final int LOAD_BANNER = 1;
     private static final int LOAD_SECKILL = 2;
+    private static final int LOAD_GETYOURLIKE = 3;
 
     @Override
     public void stopUpdate() {
@@ -40,7 +42,8 @@ public class HomePresenter extends
 
     protected void updateData() {
         mModule.loadBanner(LOAD_BANNER, NAVIGATION_BANNER, this);
-        mModule.loadSecKill(LOAD_SECKILL,   this);
+        mModule.loadSecKill(LOAD_SECKILL, this);
+        mModule.loadGetYourLike(LOAD_GETYOURLIKE, this);
     }
 
     @Override
@@ -52,6 +55,9 @@ public class HomePresenter extends
                 break;
             case LOAD_SECKILL:
                 mView.updateSecKill((List<SecKillResultBean.SecKillInfoBean.RowsBean>) data);
+                break;
+            case LOAD_GETYOURLIKE:
+                mView.updateGetYourLike((List<GetYourLikeResultBean.GetYourLikeInfoBean.RowsBean>) data);
                 break;
         }
     }

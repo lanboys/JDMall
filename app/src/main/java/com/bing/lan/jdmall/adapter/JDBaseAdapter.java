@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
 
+import com.bing.lan.comm.utils.LogUtil;
+
 import java.util.List;
 
 public abstract class JDBaseAdapter<T> extends BaseAdapter {
 
+	protected final LogUtil log = LogUtil.getLogUtil(getClass(), LogUtil.LOG_VERBOSE);
 	protected List<T> mDatas;
 	protected LayoutInflater mInflater;
 	

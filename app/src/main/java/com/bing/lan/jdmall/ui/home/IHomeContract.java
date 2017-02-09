@@ -2,6 +2,7 @@ package com.bing.lan.jdmall.ui.home;
 
 import com.bing.lan.comm.base.mvp.IBaseContract;
 import com.bing.lan.comm.base.mvp.fragment.IBaseFragmentContract;
+import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public interface IHomeContract {
 
         void updateBanner(List<String> list);
         void updateSecKill(List<SecKillResultBean.SecKillInfoBean.RowsBean> rowsBeen);
+        void updateGetYourLike(List<GetYourLikeResultBean.GetYourLikeInfoBean.RowsBean> rowsBeen);
 
         void showBanner(boolean isShow);
     }
@@ -30,6 +32,7 @@ public interface IHomeContract {
         void loadBanner(int action, int adKind, IBaseContract.OnDataChangerListener listener);
 
         void loadSecKill(int action, IBaseContract.OnDataChangerListener listener);
+        void loadGetYourLike(int action, IBaseContract.OnDataChangerListener listener);
 
     }
 }

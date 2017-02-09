@@ -6,10 +6,11 @@
 
     <!-- 头部 -->
 
+    <!--android:background="#FAFAFA"-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#FAFAFA"
+        android:background="#cc08e2"
         android:focusable="true"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -122,25 +123,24 @@
                 android:layout_height="160dp"
                 android:background="@android:color/white"/>
 
-            <!--
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginLeft="6dp"
-               android:layout_marginTop="10dp"
-               android:text="猜你喜欢"
-               android:textColor="#F00"
-               android:textSize="16sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="10dp"
+                android:text="猜你喜欢"
+                android:textColor="#F00"
+                android:textSize="16sp"/>
 
-           <GridView
-               android:id="@+id/recommend_gv"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:background="#FFF"
-               android:listSelector="@android:color/transparent"
-               android:numColumns="2"
-               android:scrollbars="none" />
-           -->
+            <GridView
+                android:id="@+id/recommend_gv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="2"
+                android:scrollbars="none"/>
+
         </LinearLayout>
     </com.bing.lan.comm.view.FlexiScrollView>
 

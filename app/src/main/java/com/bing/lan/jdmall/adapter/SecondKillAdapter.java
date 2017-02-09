@@ -11,7 +11,6 @@ import com.bing.lan.jdmall.R;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
 import com.loopj.android.image.SmartImageView;
 
-
 public class SecondKillAdapter extends JDBaseAdapter<SecKillResultBean.SecKillInfoBean.RowsBean> {
 
     public SecondKillAdapter(Context context) {
@@ -45,7 +44,7 @@ public class SecondKillAdapter extends JDBaseAdapter<SecKillResultBean.SecKillIn
         return convertView;
     }
 
-    class ViewHolder {
+    static class ViewHolder {
 
         SmartImageView smiv;
         TextView normalpriceTv;

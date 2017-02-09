@@ -104,7 +104,7 @@ public class ImageLoaderManager {
 
     public static void saveShareImage(String url, final SaveImageCallBack callBack) {
         final File file = new File(AppUtil.getAppContext().getExternalCacheDir(),
-                StringUtil.MD5(url) + ".jpeg");
+                MD5Util.MD5(url) + ".jpeg");
         if (file.exists()) {
             callBack.callBack(file);
             return;
