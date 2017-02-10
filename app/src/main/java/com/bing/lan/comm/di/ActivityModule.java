@@ -12,6 +12,10 @@ import com.bing.lan.jdmall.ui.main.IMainContract;
 import com.bing.lan.jdmall.ui.main.MainActivity;
 import com.bing.lan.jdmall.ui.main.MainModule;
 import com.bing.lan.jdmall.ui.main.MainPresenter;
+import com.bing.lan.jdmall.ui.productdetail.IProductDetailContract;
+import com.bing.lan.jdmall.ui.productdetail.ProductDetailActivity;
+import com.bing.lan.jdmall.ui.productdetail.ProductDetailModule;
+import com.bing.lan.jdmall.ui.productdetail.ProductDetailPresenter;
 import com.bing.lan.jdmall.ui.register.IRegisterContract;
 import com.bing.lan.jdmall.ui.register.RegisterActivity;
 import com.bing.lan.jdmall.ui.register.RegisterModule;
@@ -76,6 +80,14 @@ public class ActivityModule {
         loginPresenter.setModule(new MainModule());
         loginPresenter.onAttachView((MainActivity) mActivity);
         return loginPresenter;
+    }
+
+    @Provides
+    public IProductDetailContract.IProductDetailPresenter provideProductDetailPresenter() {
+        ProductDetailPresenter productDetailPresenter = new ProductDetailPresenter();
+        productDetailPresenter.setModule(new ProductDetailModule());
+        productDetailPresenter.onAttachView((ProductDetailActivity) mActivity);
+        return productDetailPresenter;
     }
 
     @Provides

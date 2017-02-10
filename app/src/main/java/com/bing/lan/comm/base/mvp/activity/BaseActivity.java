@@ -79,7 +79,7 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
      * 请求状态栏透明
      */
     protected boolean isTranslucentStatus() {
-        return true;
+        return false;
     }
 
     /**
@@ -108,7 +108,9 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
                     // | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION //将界面伸到导航栏下面,不隐藏导航栏
             );
 
-            //2.将StatusBar颜色改为透明(注意不是系统StatusBar,系统的在21时,默认为透明了)
+            //2.将StatusBar颜色改为透明(注意不是系统StatusBar,
+            // 系统的在21时,默认为透明,可以在values-21 NoActionBar主题中设置其他颜色
+            // <item name="android:statusBarColor">@android:color/transparent</item>
             getWindow().setStatusBarColor(Color.TRANSPARENT);
             // getWindow().setStatusBarColor(Color.BLACK);
             return;
