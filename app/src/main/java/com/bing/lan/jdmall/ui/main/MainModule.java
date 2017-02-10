@@ -1,5 +1,6 @@
 package com.bing.lan.jdmall.ui.main;
 
+import com.bing.lan.comm.base.mvp.IBaseContract;
 import com.bing.lan.comm.base.mvp.activity.BaseActivityModule;
 
 /**
@@ -9,4 +10,8 @@ import com.bing.lan.comm.base.mvp.activity.BaseActivityModule;
 public class MainModule extends BaseActivityModule
         implements IMainContract.IMainModule {
 
+    @Override
+    public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
+
+    }
 }

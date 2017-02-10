@@ -7,6 +7,6 @@ import com.bing.lan.comm.base.mvp.activity.IBaseActivityContract.IBaseActivityMo
  * @author 蓝兵
  * @time 2017/2/6  15:30
  */
-public class BaseActivityModule extends BaseModule
+public abstract class BaseActivityModule extends BaseModule
         implements IBaseActivityModule {
 }

@@ -17,11 +17,11 @@ import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
  * Created by 520 on 2017/1/11.
  */
 
-public abstract class AbsRefreshPresenter<DATA, LISTVIEWBEAN,
-        T extends AbsRefreshFragment,
-        V extends AbsRefreshModule>
-        extends BaseFragmentPresenter<T, V>
-        implements AbsRefreshModule.OnLoadDataListener<DATA> {
+public abstract class AbsRefreshPresenter<DATA, LISTVIEWBEAN>
+        extends BaseFragmentPresenter<IAbsRefreshContract.IAbsRefreshView,
+        IAbsRefreshContract.IAbsRefreshModule>
+        implements IAbsRefreshContract.IAbsRefreshPresenter {
+
 
     /**
      * 区分加载更多还是更新数据
@@ -48,25 +48,24 @@ public abstract class AbsRefreshPresenter<DATA, LISTVIEWBEAN,
         updateData();
     }
 
-
     public void loadImage(Object path, ImageView imageView) {
         mModule.loadImage(path, imageView);
     }
 
-    // public void loadMoreData(int index) {
     public void loadMoreData() {
         if (isFinishLoadTask()) {
             mIsLoadMore = true;
-            mModule.loadData(mNextLoadMoreDataUrlIndex, this);
+            mModule.loadData(0, mNextLoadMoreDataUrlIndex, this);
         }
         mView.updateFooterView(AbsRefreshFragment.LoadDataResult.LOAD_LOADING);
         mView.setListViewSelectLastVisible();
     }
 
-    protected void updateData() {
+    @Override
+    public void updateData() {
         if (isFinishLoadTask()) {
             mIsLoadMore = false;
-            mModule.loadData(0, this);//更新数据,从0开始
+            mModule.loadData(0, 0, this);//更新数据,从0开始
         }
     }
 
@@ -78,7 +77,8 @@ public abstract class AbsRefreshPresenter<DATA, LISTVIEWBEAN,
         return true;
     }
 
-    protected void onListViewScrollStateChanged(AbsListView view, int scrollState) {
+    @Override
+    public void onListViewScrollStateChanged(AbsListView view, int scrollState) {
 
         if (mView.isOpenFooterLoadMoreView()) {
 
@@ -104,17 +104,17 @@ public abstract class AbsRefreshPresenter<DATA, LISTVIEWBEAN,
     }
 
     @Override
-    public void onSuccess(final DATA objectData) {
+    public void onSuccess(int action, final Object objectData) {
         AppUtil.postTaskSafe(new Runnable() {
             @Override
             public void run() {
                 //关闭刷新进度条
                 mView.closeRefreshUI();
 
-                List<LISTVIEWBEAN> data = getListViewBean(objectData);
+                List<LISTVIEWBEAN> data = getListViewBean((DATA) objectData);
 
                 if (mView.isOpenHeaderBannerView()) {
-                    List<?> bannerData = getHeaderBannerBean(objectData);
+                    List<?> bannerData = getHeaderBannerBean((DATA) objectData);
                     mView.updateHeaderBanner(bannerData);
                 }
 
@@ -166,7 +166,7 @@ public abstract class AbsRefreshPresenter<DATA, LISTVIEWBEAN,
     }
 
     @Override
-    public void onError(Throwable e) {
+    public void onError(int action, Throwable e) {
         AppUtil.postTaskSafe(new Runnable() {
             @Override
             public void run() {
@@ -200,7 +200,9 @@ public abstract class AbsRefreshPresenter<DATA, LISTVIEWBEAN,
      * @param object
      * @return
      */
-    protected abstract List<LISTVIEWBEAN> getListViewBean(DATA object);
+    protected List<LISTVIEWBEAN> getListViewBean(DATA object) {
+        return null;
+    }
 
     protected List<?> getHeaderBannerBean(DATA object) {
         // if (mView.isOpenHeaderBannerView()) {
@@ -208,8 +210,6 @@ public abstract class AbsRefreshPresenter<DATA, LISTVIEWBEAN,
         // }
         return null;
     }
-
-
 
     public void onListViewItemClick(AdapterView<?> parent, View view, int position, long id) {
 

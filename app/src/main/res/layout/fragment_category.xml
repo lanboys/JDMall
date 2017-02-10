@@ -52,11 +52,18 @@
                 android:orientation="vertical"/>
         </com.bing.lan.comm.view.FlexiScrollView>
 
-        <FrameLayout
-            android:id="@+id/framelayout"
+        <!--<FrameLayout-->
+        <!--android:id="@+id/framelayout"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="3"/>-->
+
+        <include
+            layout="@layout/fragment_list_view_refresh"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"/>
+
     </LinearLayout>
 
 </LinearLayout>

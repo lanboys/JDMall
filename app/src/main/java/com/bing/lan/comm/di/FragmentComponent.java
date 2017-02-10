@@ -16,4 +16,6 @@ public interface FragmentComponent {
 
     void inject(CategoryFragment categoryFragment);
 
+    // <LISTVIEWBEAN> void inject(AbsRefreshFragment listviewbeanAbsRefreshFragment);
+
 }

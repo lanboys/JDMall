@@ -1,7 +1,7 @@
 package com.bing.lan.jdmall.ui.category;
 
+import com.bing.lan.comm.base.mvp.BaseModule;
 import com.bing.lan.comm.base.mvp.IBaseContract;
-import com.bing.lan.comm.base.mvp.fragment.BaseFragmentModule;
 import com.bing.lan.jdmall.bean.CategoryResultBean;
 
 import java.util.List;
@@ -11,14 +11,24 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
+import static com.bing.lan.jdmall.ui.category.CategoryPresenter.LOAD_TOPCATEGORYINFO;
+
 /**
  * @author 蓝兵
  * @time 2017/2/8  10:26
  */
-public class CategoryModule extends BaseFragmentModule
+public class CategoryModule extends BaseModule
         implements ICategoryContract.ICategoryModule {
 
     @Override
+    public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
+        switch (action) {
+            case LOAD_TOPCATEGORYINFO:
+                loadCategory(action, listener);
+                break;
+        }
+    }
+
     public void loadCategory(final int action, final IBaseContract.OnDataChangerListener listener) {
         mApiService.loadCategory()
                 .filter(new Func1<CategoryResultBean, Boolean>() {

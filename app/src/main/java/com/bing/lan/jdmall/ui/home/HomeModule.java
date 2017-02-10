@@ -159,4 +159,9 @@ public class HomeModule extends BaseFragmentModule
                     }
                 });
     }
+
+    @Override
+    public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
+
+    }
 }

@@ -89,6 +89,11 @@ public class LoginModule extends BaseActivityModule implements ILoginContract.IL
         AppUtil.putGlobal(Constants.USER_INFO, data);
     }
 
+    @Override
+    public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
+
+    }
+
     //    interface OnDataChangerListener {
     //
     //        void onSuccess(int action, Object data);

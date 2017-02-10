@@ -1,5 +1,6 @@
 package com.bing.lan.jdmall.ui.mine;
 
+import com.bing.lan.comm.base.mvp.IBaseContract;
 import com.bing.lan.comm.base.mvp.fragment.BaseFragmentModule;
 import com.bing.lan.jdmall.db.JDUserInfoDao;
 
@@ -13,5 +14,10 @@ public class MineModule extends BaseFragmentModule
     public void logout() {
 // TODO: 2017/2/8 清空数据库
         JDUserInfoDao.deleteAllLoginUserInfo();
+    }
+
+    @Override
+    public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
+
     }
 }

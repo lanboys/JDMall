@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bing.lan.comm.base.BaseViewHolder;
 import com.bing.lan.comm.base.adapter.MyBaseAdapter;
 import com.bing.lan.comm.base.mvp.fragment.BaseFragment;
+import com.bing.lan.comm.di.FragmentComponent;
 import com.bing.lan.comm.view.LoadPageView;
 import com.bing.lan.jdmall.R;
 import com.youth.banner.Banner;
@@ -26,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static com.bing.lan.comm.base.mvp.fragment.refresh.AbsRefreshFragment.LoadDataResult.LOAD_EMPTY;
 import static com.bing.lan.comm.base.mvp.fragment.refresh.AbsRefreshFragment.LoadDataResult.LOAD_ERROR;
@@ -35,8 +35,14 @@ import static com.bing.lan.comm.base.mvp.fragment.refresh.AbsRefreshFragment.Loa
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class AbsRefreshFragment<LISTVIEWBEAN, T extends AbsRefreshPresenter> extends BaseFragment<T>
-        implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener, AdapterView.OnItemClickListener {
+// T extends IAbsRefreshContract.IAbsRefreshPresenter
+
+public abstract class AbsRefreshFragment<LISTVIEWBEAN>
+        extends BaseFragment<IAbsRefreshContract.IAbsRefreshPresenter>
+        implements IAbsRefreshContract.IAbsRefreshView,
+        SwipeRefreshLayout.OnRefreshListener,
+        AbsListView.OnScrollListener,
+        AdapterView.OnItemClickListener {
 
     @BindView(R.id.pull_refresh_view)
     protected SwipeRefreshLayout mRefreshLayout;
@@ -48,7 +54,7 @@ public abstract class AbsRefreshFragment<LISTVIEWBEAN, T extends AbsRefreshPrese
     private Banner mBanner;
 
     protected int getLayoutResId() {
-        return 0;
+        return R.layout.fragment_list_view_refresh;
     }
 
     @Override
@@ -64,9 +70,9 @@ public abstract class AbsRefreshFragment<LISTVIEWBEAN, T extends AbsRefreshPrese
 
     @Override
     protected View initSuccessView(LayoutInflater layoutInflater, LoadPageView parent) {
-        View view = layoutInflater.inflate(R.layout.fragment_list_view_refresh, parent, false);
-//        View view = View.inflate(AppUtil.getAppContext(), R.layout.fragment_list_view_refresh, null);
-        ButterKnife.bind(this, view);
+        View view = layoutInflater.inflate(getLayoutResId(), parent, false);
+        //        View view = View.inflate(AppUtil.getAppContext(), R.layout.fragment_list_view_refresh, null);
+        //         ButterKnife.bind(this, view);
         if (isOpenHeaderBannerView()) {
             mRefreshListView.addHeaderView(addHeaderView());
         }
@@ -87,15 +93,18 @@ public abstract class AbsRefreshFragment<LISTVIEWBEAN, T extends AbsRefreshPrese
         return view;
     }
 
-    protected boolean isOpenHeaderBannerView() {
+    @Override
+    public boolean isOpenHeaderBannerView() {
         return true;
     }
 
-    protected void setListViewSelectLastVisible() {
+    @Override
+    public void setListViewSelectLastVisible() {
         mRefreshListView.setSelection(mRefreshListView.getCount() - 1);
     }
 
-    protected boolean isOpenFooterLoadMoreView() {
+    @Override
+    public boolean isOpenFooterLoadMoreView() {
         return true;
     }
 
@@ -197,9 +206,13 @@ public abstract class AbsRefreshFragment<LISTVIEWBEAN, T extends AbsRefreshPrese
         return footerView;
     }
 
-    // @Override
+    @Override
     public void updateFooterView(LoadDataResult result) {
         mLoadMoreHolder.refreshViewData(result, 0);
+    }
+
+    @Override
+    protected void startInject(FragmentComponent fragmentComponent) {
     }
 
     /**
@@ -230,20 +243,21 @@ public abstract class AbsRefreshFragment<LISTVIEWBEAN, T extends AbsRefreshPrese
         }
     }
 
-    // @Override
+    @Override
     public void closeRefreshUI() {
         if (mRefreshLayout != null) {
             mRefreshLayout.setRefreshing(false);
         }
     }
 
-    // @Override
-    public void updateListViewData(List<LISTVIEWBEAN> data) {
-        mRefreshAdapter.setDataAndRefresh(data);
+    @Override
+    public <LISTVIEWBEAN1> void updateListViewData(List<LISTVIEWBEAN1> data) {
+        mRefreshAdapter.setDataAndRefresh((List<LISTVIEWBEAN>) data);
     }
 
-    public void loadMoreListViewData(List<LISTVIEWBEAN> data) {
-        mRefreshAdapter.insert(data);
+    @Override
+    public <LISTVIEWBEAN1> void loadMoreListViewData(List<LISTVIEWBEAN1> data) {
+        mRefreshAdapter.insert((List<LISTVIEWBEAN>) data);
     }
 
     /**
@@ -266,9 +280,15 @@ public abstract class AbsRefreshFragment<LISTVIEWBEAN, T extends AbsRefreshPrese
         return 0;
     }
 
-    public abstract int getListViewItemLayoutId(int itemViewType);
+    public int getListViewItemLayoutId(int itemViewType) {
+        // TODO: 2017/2/10
+        return 0;
+    }
 
-    public abstract BaseViewHolder<LISTVIEWBEAN> getListViewItemHolder(int itemViewType, View convertView);
+    public BaseViewHolder<LISTVIEWBEAN> getListViewItemHolder(int itemViewType, View convertView) {
+        // TODO: 2017/2/10
+        return null;
+    }
 
     /**
      * @param view
@@ -290,7 +310,7 @@ public abstract class AbsRefreshFragment<LISTVIEWBEAN, T extends AbsRefreshPrese
         mPresenter.onListViewItemClick(parent, view, position, id);
     }
 
-    enum LoadDataResult {
+    public enum LoadDataResult {
 
         LOAD_HIDE_ALL,
         LOAD_ERROR,

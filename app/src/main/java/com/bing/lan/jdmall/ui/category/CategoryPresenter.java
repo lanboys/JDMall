@@ -13,11 +13,11 @@ public class CategoryPresenter extends
         BaseFragmentPresenter<ICategoryContract.ICategoryView, ICategoryContract.ICategoryModule>
         implements ICategoryContract.ICategoryPresenter {
 
-    private static final int LOAD_TOPCATEGORYINFO = 1;
+    public static final int LOAD_TOPCATEGORYINFO = 1;
 
     @Override
     public void onStart() {
-        mModule.loadCategory(LOAD_TOPCATEGORYINFO, this);
+        mModule.loadData(LOAD_TOPCATEGORYINFO, this);
     }
 
     @Override

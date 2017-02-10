@@ -1,9 +1,7 @@
 package com.bing.lan.jdmall.ui.category;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,18 +21,18 @@ import butterknife.BindView;
 /**
  *
  */
-public class CategoryFragment extends BaseFragment<ICategoryContract.ICategoryPresenter>
+public class CategoryFragment
+        extends BaseFragment<ICategoryContract.ICategoryPresenter>
         implements ICategoryContract.ICategoryView, View.OnClickListener {
 
-    Context context;
+
     @BindView(R.id.scrollview)
     ScrollView mScrollView;
-    @BindView(R.id.framelayout)
-    FrameLayout mFrameLayout;
+    // @BindView(R.id.framelayout)
+    // FrameLayout mFrameLayout;
     @BindView(R.id.category_container)
     LinearLayout mLinearLayout;
     private List<String> titles;
-    // private String[] titles = {"常用分类", "潮流女装", "品牌男装", "内衣配饰", "家用电器", "手机数码", "电脑办公", "个护化妆", "母婴频道", "食物生鲜", "酒水饮料", "家居家纺", "整车车品", "鞋靴箱包", "运动户外", "图书", "玩具乐器", "钟表", "居家生活", "珠宝饰品", "音像制品", "家具建材", "计生情趣", "营养保健", "奢侈礼品", "生活服务", "旅游出行"};
     //装装ScrollView的item的TextView的数组
     private TextView[] textViewArray;
     //装ScrollView的item的数组
@@ -45,27 +43,31 @@ public class CategoryFragment extends BaseFragment<ICategoryContract.ICategoryPr
         return R.layout.fragment_category;
     }
 
+    // @Override
+    // protected void startInject(FragmentComponent fragmentComponent) {
+    //     fragmentComponent.inject(this);
+    // }
+
+    @Override
+    protected void readyStartPresenter() {
+        setViewState2LoadPage(LoadPageView.LoadDataResult.LOAD_SUCCESS);
+        // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new FragmentOne()).commit();
+        mPresenter.onStart();
+    }
+
     @Override
     protected void startInject(FragmentComponent fragmentComponent) {
         fragmentComponent.inject(this);
     }
 
-    @Override
-    protected void readyStartPresenter() {
 
-        setViewState2LoadPage(LoadPageView.LoadDataResult.LOAD_SUCCESS);
-
-
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new FragmentOne()).commit();
-        mPresenter.onStart();
-    }
 
     private void initView() {
 
 
     }
 
-    @Override
+    // @Override
     public void onClick(View v) {
         ToastUtil.showToast(getActivity(), titles.get((int) v.getId()));
         changeTextColor((int) v.getId());
@@ -102,9 +104,9 @@ public class CategoryFragment extends BaseFragment<ICategoryContract.ICategoryPr
                 fragment = new Fragment7();
                 break;
         }
-        if (fragment != null) {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, fragment).commit();
-        }
+        // if (fragment != null) {
+        //     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, fragment).commit();
+        // }
     }
 
     /**
@@ -134,7 +136,7 @@ public class CategoryFragment extends BaseFragment<ICategoryContract.ICategoryPr
         mScrollView.smoothScrollTo(0, x);
     }
 
-    @Override
+    // @Override
     public void updateSlideMenu(List<CategoryResultBean.TopCategoryInfoBean> list) {
         titles = new ArrayList<>();
         for (CategoryResultBean.TopCategoryInfoBean topCategoryInfoBean : list) {

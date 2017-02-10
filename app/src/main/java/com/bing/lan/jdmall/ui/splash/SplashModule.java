@@ -1,5 +1,6 @@
 package com.bing.lan.jdmall.ui.splash;
 
+import com.bing.lan.comm.base.mvp.IBaseContract;
 import com.bing.lan.comm.base.mvp.activity.BaseActivityModule;
 
 /**
@@ -9,4 +10,8 @@ import com.bing.lan.comm.base.mvp.activity.BaseActivityModule;
 public class SplashModule extends BaseActivityModule
         implements ISplashContract.ISplashModule {
 
+    @Override
+    public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
+
+    }
 }

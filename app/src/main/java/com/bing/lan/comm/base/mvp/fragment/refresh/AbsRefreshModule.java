@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bing.lan.comm.api.ApiManager;
 import com.bing.lan.comm.api.ApiService;
 import com.bing.lan.comm.base.MyBaseProtocol;
+import com.bing.lan.comm.base.mvp.IBaseContract;
 import com.bing.lan.comm.base.mvp.fragment.BaseFragmentModule;
 import com.bing.lan.comm.utils.AppUtil;
 import com.bing.lan.comm.utils.ImageLoaderManager;
@@ -22,7 +23,8 @@ import rx.schedulers.Schedulers;
  * @author 蓝兵
  * @time 2017/1/12  11:52
  */
-public abstract class AbsRefreshModule<JSONDATA, DATA> extends BaseFragmentModule {
+public abstract class AbsRefreshModule<JSONDATA, DATA> extends BaseFragmentModule
+        implements IAbsRefreshContract.IAbsRefreshModule {
 
     protected Subscription mLatestSubscribe;
     private Runnable mLoadDataTask;
@@ -39,6 +41,11 @@ public abstract class AbsRefreshModule<JSONDATA, DATA> extends BaseFragmentModul
         ImageLoaderManager.loadRefreshImage(AppUtil.getAppContext(), imageView, (String) path);
     }
 
+    @Override
+    public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
+
+    }
+
     // public Runnable getLoadDataTask() {
     //     return mLoadDataTask;
     // }
@@ -51,7 +58,7 @@ public abstract class AbsRefreshModule<JSONDATA, DATA> extends BaseFragmentModul
         return mLoadDataTask != null;
     }
 
-    public void loadData(final int index, final OnLoadDataListener<DATA> loadDataListener) {
+    public void loadData(int action, final int index, final IBaseContract.OnDataChangerListener loadDataListener) {
 
         //     if (mProtocol == null) {
         //         mProtocol = getBaseProtocol();
@@ -99,12 +106,12 @@ public abstract class AbsRefreshModule<JSONDATA, DATA> extends BaseFragmentModul
                     @Override
                     public void onNext(DATA data) {
                         log.d("onNext():data " + data.toString());
-                        loadDataListener.onSuccess(data);
+                        loadDataListener.onSuccess(0, data);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        loadDataListener.onError(e);
+                        loadDataListener.onError(0, e);
                         // log.e("OnError: 加载数据失败 ", e);
                         log.e("onError(): 加载数据失败 " + e.getLocalizedMessage());
                     }
@@ -116,7 +123,9 @@ public abstract class AbsRefreshModule<JSONDATA, DATA> extends BaseFragmentModul
                 });
     }
 
-    protected abstract Observable<JSONDATA> getDataObservable(ApiService apiService, int index);
+    protected Observable<JSONDATA> getDataObservable(ApiService apiService, int index) {
+        return null;
+    }
 
     protected DATA DataTransform(JSONDATA jsondata) {
         return (DATA) jsondata;
@@ -132,7 +141,9 @@ public abstract class AbsRefreshModule<JSONDATA, DATA> extends BaseFragmentModul
      * @param index
      * @return
      */
-    protected abstract String getUrl(int index);
+    protected String getUrl(int index) {
+        return null;
+    }
 
     /**
      * 将从url访问到的json数据转换成bean 或 list
@@ -140,7 +151,9 @@ public abstract class AbsRefreshModule<JSONDATA, DATA> extends BaseFragmentModul
      * @param jsonStr
      * @return
      */
-    protected abstract DATA json2BeanOrList(String jsonStr);
+    protected DATA json2BeanOrList(String jsonStr) {
+        return null;
+    }
 
     @NonNull
     protected MyBaseProtocol<DATA> getBaseProtocol() {
@@ -163,10 +176,17 @@ public abstract class AbsRefreshModule<JSONDATA, DATA> extends BaseFragmentModul
     //     }
     // }
 
-    protected interface OnLoadDataListener<DATA> {
+    // protected interface OnDataChangerListener<DATA> {
+    //
+    //     void onSuccess(DATA data);
+    //
+    //     void onError(Throwable e);
+    // }
 
-        void onSuccess(DATA data);
-
-        void onError(Throwable e);
-    }
+    // interface OnDataChangerListener {
+    //
+    //     void onSuccess(int action, Object data);
+    //
+    //     void onError(int action, Throwable e);
+    // }
 }

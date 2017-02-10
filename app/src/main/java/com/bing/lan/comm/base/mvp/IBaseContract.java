@@ -1,6 +1,5 @@
 package com.bing.lan.comm.base.mvp;
 
-
 import android.widget.ImageView;
 
 import com.bing.lan.comm.base.mvp.activity.BaseActivity;
@@ -8,6 +7,7 @@ import com.bing.lan.comm.base.mvp.activity.BaseActivity;
 public interface IBaseContract {
 
     interface IBaseView<T extends IBasePresenter> {
+
         /**
          * 当P层发生错误时调用
          */
@@ -22,7 +22,6 @@ public interface IBaseContract {
         void startActivity(Class<? extends BaseActivity> clazz, boolean isFinish);
 
         void startActivity(Class<? extends BaseActivity> clazz);
-
     }
 
     interface IBasePresenter<T extends IBaseView, M extends IBaseModule> extends OnDataChangerListener {
@@ -42,6 +41,7 @@ public interface IBaseContract {
 
         void loadImage(Object path, ImageView imageView);
 
+        void loadData(int action, OnDataChangerListener listener, Object... parameter);
     }
 
     interface OnDataChangerListener {

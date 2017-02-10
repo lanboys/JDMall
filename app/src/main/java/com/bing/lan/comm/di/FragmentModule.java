@@ -78,4 +78,13 @@ public class FragmentModule {
         shopcarPresenter.onAttachView((ShopcarFragment) mFragment);
         return shopcarPresenter;
     }
+
+    // @Provides
+    // public IAbsRefreshContract.IAbsRefreshPresenter provideAbsRefreshPresenter() {
+    //     AbsRefreshPresenter shopcarPresenter = new AbsRefreshPresenter();
+    //     shopcarPresenter.setParams(initParams);
+    //     shopcarPresenter.setModule(new AbsRefreshModule());
+    //     shopcarPresenter.onAttachView((AbsRefreshFragment) mFragment);
+    //     return shopcarPresenter;
+    // }
 }
