@@ -20,6 +20,11 @@ public class RegisterActivity extends BaseActivity<IRegisterContract.IRegisterPr
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected void readyStartPresenter() {
         //启动p层逻辑
         mPresenter.onStart();

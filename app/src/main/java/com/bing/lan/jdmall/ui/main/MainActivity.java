@@ -43,6 +43,11 @@ public class MainActivity extends BaseActivity<IMainContract.IMainPresenter>
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected void readyStartPresenter() {
 
         initTabData();

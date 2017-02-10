@@ -14,4 +14,5 @@
     tools:context="com.bing.lan.jdmall.ui.productdetail.ProductDetailActivity"
     tools:showIn="@layout/activity_product_detail">
 
+
 </RelativeLayout>

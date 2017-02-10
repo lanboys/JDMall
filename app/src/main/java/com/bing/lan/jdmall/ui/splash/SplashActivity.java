@@ -28,6 +28,11 @@ public class SplashActivity extends BaseActivity<ISplashContract.ISplashPresente
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected void readyStartPresenter() {
         mPresenter.onStart();
     }

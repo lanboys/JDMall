@@ -44,6 +44,11 @@ public class LoginActivity extends BaseActivity<ILoginContract.ILoginPresenter>
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected void readyStartPresenter() {
         //启动p层逻辑
         mPresenter.onStart();

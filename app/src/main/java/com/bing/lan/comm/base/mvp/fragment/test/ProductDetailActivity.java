@@ -18,6 +18,11 @@ public class ProductDetailActivity extends BaseActivity<IProductDetailContract.I
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected void readyStartPresenter() {
 
     }

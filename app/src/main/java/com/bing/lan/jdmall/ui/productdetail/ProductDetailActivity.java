@@ -2,45 +2,47 @@ package com.bing.lan.jdmall.ui.productdetail;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.bing.lan.comm.base.mvp.activity.BaseActivity;
 import com.bing.lan.comm.di.ActivityComponent;
+import com.bing.lan.comm.utils.AppUtil;
 import com.bing.lan.jdmall.R;
+import com.bing.lan.jdmall.ui.category.Fragment1;
 
 import butterknife.BindView;
 
 import static com.bing.lan.jdmall.R.id.fab;
 
 public class ProductDetailActivity extends BaseActivity<IProductDetailContract.IProductDetailPresenter>
-        implements IProductDetailContract.IProductDetailView {
-
-    // @Override
-    // protected void onCreate(Bundle savedInstanceState) {
-    //     super.onCreate(savedInstanceState);
-    //     setContentView(R.layout.activity_product_detail);
-    //     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    //     setSupportActionBar(toolbar);
-    //
-    //     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-    //     fab.setOnClickListener(new View.OnClickListener() {
-    //         @Override
-    //         public void onClick(View view) {
-    //             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-    //                     .setAction("Action", null).show();
-    //         }
-    //     });
-    // }
+        implements IProductDetailContract.IProductDetailView, View.OnClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(fab)
     FloatingActionButton mFab;
+    @BindView(R.id.id_tablayout)
+    TabLayout mTabLayout;
+    @BindView(R.id.id_viewpager)
+    ViewPager mViewPager;
+
+    private int mTabCount = 3;
+    private String[] mTabTitle;
 
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_product_detail;
+    }
+
+    @Override
+    protected int getMenuId() {
+        return R.menu.menu_product_detail_activity;
     }
 
     @Override
@@ -49,12 +51,8 @@ public class ProductDetailActivity extends BaseActivity<IProductDetailContract.I
     }
 
     @Override
-    protected void readyStartPresenter() {
-        init();
-    }
-
-    private void init() {
-        setSupportActionBar(mToolbar);
+    protected void initView() {
+        setToolBar(mToolbar);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,5 +60,41 @@ public class ProductDetailActivity extends BaseActivity<IProductDetailContract.I
                         .setAction("Action", null).show();
             }
         });
+
+        mTabTitle = AppUtil.getStrArr(R.array.product_tab_title);
+        FragmentPagerAdapter productAdapter = new ProductFragmentPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(productAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    protected void readyStartPresenter() {
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    class ProductFragmentPagerAdapter extends FragmentPagerAdapter {
+
+        public ProductFragmentPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return new Fragment1();
+        }
+
+        @Override
+        public int getCount() {
+            return mTabTitle.length;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTabTitle[position];
+        }
     }
 }

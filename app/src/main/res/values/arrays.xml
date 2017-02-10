@@ -6,6 +6,11 @@
         <item>购物车</item>
         <item>我的</item>
     </string-array>
+    <string-array name="product_tab_title">
+        <item>商品</item>
+        <item>详情</item>
+        <item>评价</item>
+    </string-array>
 
     <integer-array name="main_tab_image">
         <item>@drawable/home_bot_bar</item>

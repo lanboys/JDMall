@@ -4,7 +4,10 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -52,9 +55,11 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
         //透明状态栏
         initTranslucentStatus();
         //初始化布局
-        initView();
+        initWindowUI();
         //启动di
         startInject(getActivityComponent());
+        //初始化View
+        initView();
         //获取权限
         requestPermissions();
     }
@@ -73,6 +78,29 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
         }
 
         AppUtil.MemoryLeakCheck(this);
+    }
+
+    protected abstract int getLayoutResId();
+
+    protected abstract void startInject(ActivityComponent activityComponent);
+
+    protected abstract void initView();
+
+    /**
+     * 权限请求成功时调用
+     */
+    protected abstract void readyStartPresenter();
+
+    protected void initWindowUI() {
+        //初始化布局
+        setContentView(getLayoutResId());
+        //绑定控件
+        mViewBind = ButterKnife.bind(this);
+    }
+
+    public void requestPermissions() {
+        // TODO: 2017/1/12 获取权限的操作
+        readyStartPresenter();
     }
 
     /**
@@ -161,27 +189,6 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
         initImmersion(hasFocus);
     }
 
-    protected void initView() {
-        //初始化布局
-        setContentView(getLayoutResId());
-        //绑定控件
-        mViewBind = ButterKnife.bind(this);
-    }
-
-    protected abstract int getLayoutResId();
-
-    protected abstract void startInject(ActivityComponent activityComponent);
-
-    /**
-     * 权限请求成功时调用
-     */
-    protected abstract void readyStartPresenter();
-
-    public void requestPermissions() {
-        // TODO: 2017/1/12 获取权限的操作
-        readyStartPresenter();
-    }
-
     protected ActivityComponent getActivityComponent() {
         return DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this, getIntent()))
@@ -219,5 +226,49 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
     @Override
     public T getPresenter() {
         return mPresenter;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (getMenuId() == 0) {
+            return super.onCreateOptionsMenu(menu);
+        }
+        getMenuInflater().inflate(getMenuId(), menu);
+        return true;
+    }
+
+    protected int getMenuId() {
+        return 0;
+    }
+
+    protected void setToolBar(Toolbar toolBar) {
+        setToolBar(toolBar, null, true);
+    }
+
+    protected void setToolBar(Toolbar toolBar, String title) {
+        setToolBar(toolBar, title, true);
+    }
+
+    protected void setToolBar(Toolbar toolBar, String title, boolean finishActivity) {
+        if (title != null) {
+            toolBar.setTitle(title);
+        }
+        setSupportActionBar(toolBar);
+        // toolBar.setIcon(R.mipmap.ic_launcher);// 设置应用图标
+        toolBar.setTitleTextColor(Color.WHITE);
+        if (finishActivity) {
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                //将默认的 返回箭头 显示出来
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
+            //给箭头添加监听器
+            toolBar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
     }
 }
