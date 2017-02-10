@@ -1,7 +1,5 @@
 package com.bing.lan.jdmall.ui.login;
 
-import com.bing.lan.comm.api.ApiManager;
-import com.bing.lan.comm.api.ApiService;
 import com.bing.lan.comm.base.mvp.IBaseContract;
 import com.bing.lan.comm.base.mvp.activity.BaseActivityModule;
 import com.bing.lan.comm.utils.AppUtil;
@@ -21,12 +19,6 @@ import rx.schedulers.Schedulers;
  */
 public class LoginModule extends BaseActivityModule implements ILoginContract.ILoginModule {
 
-
-    private ApiService mApiService;
-
-    public LoginModule() {
-        mApiService = ApiManager.getApiService();
-    }
 
     @Override
     public void login(final int action, String username, String psd, final IBaseContract.OnDataChangerListener listener) {

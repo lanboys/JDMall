@@ -1,5 +1,6 @@
 package com.bing.lan.comm.di;
 
+import com.bing.lan.comm.base.mvp.BaseModule;
 import com.bing.lan.jdmall.ui.login.LoginActivity;
 import com.bing.lan.jdmall.ui.main.MainActivity;
 import com.bing.lan.jdmall.ui.register.RegisterActivity;

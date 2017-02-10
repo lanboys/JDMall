@@ -1,6 +1,7 @@
 package com.bing.lan.comm.api;
 
 import com.bing.lan.jdmall.bean.BannerResultBean;
+import com.bing.lan.jdmall.bean.CategoryResultBean;
 import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.LoginResultBean;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
@@ -48,6 +49,9 @@ public interface ApiService {
 
     @GET("getYourFav")
     Observable<GetYourLikeResultBean> loadGetYourLike();
+
+    @GET("category")
+    Observable<CategoryResultBean> loadCategory();
 
     // @GET("home")
     // Call<ResponseBody> getUrl(@Query("index") long index);

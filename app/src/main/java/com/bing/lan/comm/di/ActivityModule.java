@@ -43,6 +43,7 @@ public class ActivityModule {
 
     /**
      * 注入的类型必须完全一致
+     *
      * @return
      */
     @Provides

@@ -1,6 +1,5 @@
 package com.bing.lan.jdmall.ui.home;
 
-import com.bing.lan.comm.api.ApiManager;
 import com.bing.lan.comm.api.ApiService;
 import com.bing.lan.comm.base.mvp.IBaseContract;
 import com.bing.lan.comm.base.mvp.fragment.BaseFragmentModule;
@@ -22,12 +21,6 @@ import rx.schedulers.Schedulers;
  */
 public class HomeModule extends BaseFragmentModule
         implements IHomeContract.IHomeModule {
-
-    private ApiService mApiService;
-
-    public HomeModule() {
-        mApiService = ApiManager.getApiService();
-    }
 
     @Override
     public void loadBanner(final int action, int adKind, final IBaseContract.OnDataChangerListener listener) {

@@ -37,7 +37,7 @@ public class RecommandAdapter extends JDBaseAdapter<GetYourLikeResultBean.GetYou
         GetYourLikeResultBean.GetYourLikeInfoBean.RowsBean bean = mDatas.get(position);
         holder.smiv.setImageUrl(ApiService.BASE_URL + bean.getIconUrl());
         holder.nameTv.setText(bean.getName());
-        log.d("getView(): "+bean.getName());
+
         holder.priceTv.setText("¥" + bean.getPrice());
 
         return convertView;
