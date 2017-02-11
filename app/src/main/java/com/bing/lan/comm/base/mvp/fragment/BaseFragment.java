@@ -52,7 +52,7 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        initView(inflater, container, savedInstanceState);
+        initWindowUI(inflater, container, savedInstanceState);
         return mLoadPage;
     }
 
@@ -88,7 +88,7 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
         AppUtil.MemoryLeakCheck(this);
     }
 
-    private void initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    private void initWindowUI(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mLoadPage == null) {
             mLayoutInflater = inflater;
             mLoadPage = new LoadPageView(getActivity()) {
@@ -99,6 +99,8 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
             };
             //点击错误页面的的加载按钮重新加载
             mLoadPage.setErrorButtonListener(this);
+            mViewBind = ButterKnife.bind(this, mLoadPage);
+            initView();
         } else {
             ViewGroup parent = (ViewGroup) mLoadPage.getParent();
             if (parent != null) {
@@ -109,9 +111,12 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
         //绑定空间
         if (mViewBind == null) {
             mViewBind = ButterKnife.bind(this, mLoadPage);
-//            mViewBind = ButterKnife.bind(mLoadPage);
+            //            mViewBind = ButterKnife.bind(mLoadPage);
         }
+
     }
+
+    protected abstract void initView();
 
     /**
      * 停止更新,释放一些正在进行的任务
@@ -150,19 +155,6 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
         Toast.makeText(AppUtil.getAppContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-//    /**
-//     * 权限请求成功时调用
-//     */
-//    protected abstract void requestPermissionSucceed();
-//
-//    /**
-//     * 可以重写onActivityCreated,将该给外界调用
-//     */
-//    public void requestPermissions() {
-//        // TODO: 2017/1/12 获取权限的操作
-//        requestPermissionSucceed();
-//    }
-
     protected View initSuccessView(LayoutInflater layoutInflater, LoadPageView parent) {
         return layoutInflater.inflate(getLayoutResId(), parent, false);
     }
@@ -175,16 +167,16 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
         errorReloadData();
     }
 
-
     public void startActivity(Class<? extends BaseActivity> clazz, boolean isFinish) {
         AppUtil.startActivity(getActivity(), clazz, isFinish);
     }
 
     /**
      * 默认false
+     *
      * @param clazz
      */
-    public void startActivity(Class<? extends BaseActivity> clazz ) {
+    public void startActivity(Class<? extends BaseActivity> clazz) {
         startActivity(clazz, false);
     }
 
@@ -197,6 +189,7 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
     protected void loadImage(Object path, ImageView imageView) {
         mPresenter.loadImage(path, imageView);
     }
+
     protected void errorReloadData() {
 
     }

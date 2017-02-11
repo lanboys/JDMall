@@ -30,7 +30,6 @@ public class MainActivity extends BaseActivity<IMainContract.IMainPresenter>
     private String[] mTabTitles;
     private int[] mTabImages;
     private LayoutInflater mInflater;
-    private int[] mTabImages1;
 
     @Override
     protected int getLayoutResId() {

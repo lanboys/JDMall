@@ -53,6 +53,11 @@ public class HomeFragment extends BaseFragment<IHomeContract.IHomePresenter>
         mPresenter.onStart();
     }
 
+    @Override
+    protected void initView() {
+
+    }
+
     private void init() {
         initListView();
         initGridView();

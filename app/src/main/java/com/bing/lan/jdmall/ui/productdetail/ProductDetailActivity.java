@@ -14,7 +14,7 @@ import com.bing.lan.comm.base.mvp.activity.BaseActivity;
 import com.bing.lan.comm.di.ActivityComponent;
 import com.bing.lan.comm.utils.AppUtil;
 import com.bing.lan.jdmall.R;
-import com.bing.lan.jdmall.ui.category.Fragment1;
+import com.bing.lan.jdmall.ui.productdetail.introduce.ProductIntroduceFragment;
 
 import butterknife.BindView;
 
@@ -84,7 +84,7 @@ public class ProductDetailActivity extends BaseActivity<IProductDetailContract.I
 
         @Override
         public Fragment getItem(int position) {
-            return new Fragment1();
+            return new ProductIntroduceFragment();
         }
 
         @Override

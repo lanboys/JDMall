@@ -24,4 +24,9 @@ public class HomeFragment extends BaseFragment<IHomeContract.IHomePresenter>
     protected void readyStartPresenter() {
 
     }
+
+    @Override
+    protected void initView() {
+
+    }
 }

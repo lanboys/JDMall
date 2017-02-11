@@ -5,6 +5,7 @@ import com.bing.lan.jdmall.bean.CategoryResultBean;
 import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.LoginResultBean;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
+import com.bing.lan.jdmall.bean.SubCategoryResultBean;
 
 import java.util.Map;
 
@@ -52,6 +53,9 @@ public interface ApiService {
 
     @GET("category")
     Observable<CategoryResultBean> loadCategory();
+
+    @GET("category")
+    Observable<SubCategoryResultBean> loadCategory(@Query("parentId") String parentId);
 
     // @GET("home")
     // Call<ResponseBody> getUrl(@Query("index") long index);

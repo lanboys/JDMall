@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.bing.lan.comm.base.BaseViewHolder;
 import com.bing.lan.comm.base.adapter.MyBaseAdapter;
 import com.bing.lan.comm.base.mvp.fragment.BaseFragment;
-import com.bing.lan.comm.di.FragmentComponent;
 import com.bing.lan.comm.view.LoadPageView;
 import com.bing.lan.jdmall.R;
 import com.youth.banner.Banner;
@@ -192,6 +191,7 @@ public abstract class AbsRefreshFragment<LISTVIEWBEAN>
         //怎么更新啊啊啊  啊  啊 啊 啊
         if (mBanner != null && imageUrls != null && imageUrls.size() > 0) {
             mBanner.setImages(imageUrls);
+            mBanner.start();
         }
     }
 
@@ -209,10 +209,6 @@ public abstract class AbsRefreshFragment<LISTVIEWBEAN>
     @Override
     public void updateFooterView(LoadDataResult result) {
         mLoadMoreHolder.refreshViewData(result, 0);
-    }
-
-    @Override
-    protected void startInject(FragmentComponent fragmentComponent) {
     }
 
     /**

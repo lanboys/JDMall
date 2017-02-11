@@ -56,6 +56,10 @@ public class MineFragment extends BaseFragment<IMineContract.IMinePresenter>
         mPresenter.onStart();
     }
 
+    @Override
+    protected void initView() {
+
+    }
 
     @Override
     public void updateViewData(LoginResultBean.UserInfoBean userInfo) {

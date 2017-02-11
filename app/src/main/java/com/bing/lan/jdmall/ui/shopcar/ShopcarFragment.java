@@ -16,6 +16,11 @@ public class ShopcarFragment extends BaseFragment<IShopcarContract.IShopcarPrese
     }
 
     @Override
+    protected void initView() {
+
+    }
+
+    @Override
     protected void startInject(FragmentComponent fragmentComponent) {
 //        fragmentComponent.inject(this);
     }
