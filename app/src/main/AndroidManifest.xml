@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.productdetail.ProductDetailActivity"
+            android:name=".ui.productdetail.ProductInfoActivity"
             android:label="@string/title_activity_product_detail"
             android:theme="@style/AppTheme.NoActionBar">
             <!--<intent-filter>-->

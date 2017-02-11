@@ -8,9 +8,9 @@ import java.util.List;
  * @author 蓝兵
  * @time 2017/2/11  18:34
  */
-public class ProductDetailResultBean extends ResultBean<ProductDetailResultBean.ProductDetailInfo> {
+public class ProductInfoResultBean extends ResultBean<ProductInfoResultBean.ProductInfo> {
 
-    public static class ProductDetailInfo {
+    public static class ProductInfo {
 
         /**
          * id : 1
@@ -40,9 +40,9 @@ public class ProductDetailResultBean extends ResultBean<ProductDetailResultBean.
         private List<String> imgUrls;
         private List<String> typeList;
 
-        public static ProductDetailResultBean objectFromData(String str) {
+        public static ProductInfoResultBean objectFromData(String str) {
 
-            return new Gson().fromJson(str, ProductDetailResultBean.class);
+            return new Gson().fromJson(str, ProductInfoResultBean.class);
         }
 
         public int getId() {

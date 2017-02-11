@@ -13,7 +13,10 @@ import com.bing.lan.comm.base.mvp.activity.BaseActivity;
 import com.bing.lan.comm.di.ActivityComponent;
 import com.bing.lan.comm.utils.AppUtil;
 import com.bing.lan.jdmall.R;
+import com.bing.lan.jdmall.ui.productdetail.comment.SampleFragment;
 import com.bing.lan.jdmall.ui.productdetail.introduce.ProductIntroduceFragment;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -32,6 +35,7 @@ public class ProductInfoActivity extends BaseActivity<IProductInfoContract.IProd
     private int mTabCount = 3;
     private String[] mTabTitle;
     private long mProductId;
+    private ArrayList<Fragment> mFragments;
 
     @Override
     protected int getLayoutResId() {
@@ -52,17 +56,28 @@ public class ProductInfoActivity extends BaseActivity<IProductInfoContract.IProd
     protected void initView() {
 
         setToolBar(mToolbar);
+        initFragment();
+    }
 
-        mTabTitle = AppUtil.getStrArr(R.array.product_tab_title);
-        FragmentPagerAdapter productAdapter = new ProductFragmentPagerAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(productAdapter);
-        mTabLayout.setupWithViewPager(mViewPager);
+    private void initFragment() {
+        mFragments = new ArrayList<>();
+        mFragments.add(new ProductIntroduceFragment());
+        // mFragments.add(new ProductDetailFragment());
+        // mFragments.add(new ProductCommentFragment());
+        mFragments.add(new SampleFragment());
+        mFragments.add(new SampleFragment());
     }
 
     @Override
     protected void initData(Intent intent) {
         //1.拿到商品的id
         mProductId = intent.getLongExtra(PID_KEY, 0);
+        log.d("initData(): " + mProductId);
+
+        mTabTitle = AppUtil.getStrArr(R.array.product_tab_title);
+        FragmentPagerAdapter productAdapter = new ProductFragmentPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(productAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
@@ -85,7 +100,7 @@ public class ProductInfoActivity extends BaseActivity<IProductInfoContract.IProd
 
         @Override
         public Fragment getItem(int position) {
-            return new ProductIntroduceFragment();
+            return mFragments.get(position);
         }
 
         @Override

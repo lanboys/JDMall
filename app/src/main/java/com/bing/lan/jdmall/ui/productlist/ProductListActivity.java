@@ -20,7 +20,7 @@ import com.bing.lan.jdmall.adapter.BrandAdapter;
 import com.bing.lan.jdmall.adapter.ProductListAdapter;
 import com.bing.lan.jdmall.bean.BrandResultBean;
 import com.bing.lan.jdmall.bean.ProductListResultBean;
-import com.bing.lan.jdmall.ui.productdetail.ProductDetailActivity;
+import com.bing.lan.jdmall.ui.productdetail.ProductInfoActivity;
 
 import java.util.List;
 
@@ -316,8 +316,8 @@ public class ProductListActivity extends
             long pId = mProductListAdapter.getItemId(position);
             log.d("onItemClick(): " + pId);
             //2.跳转到商品详情页
-            Intent intent = new Intent(ProductListActivity.this, ProductDetailActivity.class);
-            intent.putExtra(ProductDetailActivity.PID_KEY, pId);
+            Intent intent = new Intent(ProductListActivity.this, ProductInfoActivity.class);
+            intent.putExtra(ProductInfoActivity.PID_KEY, pId);
             startActivity(intent);
         }
     }

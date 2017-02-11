@@ -1,5 +1,6 @@
 package com.bing.lan.comm.base.mvp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -59,8 +60,15 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //初始化数据
+        initData(getActivity().getIntent());
         //准备启动p层逻辑
         readyStartPresenter();
+    }
+
+    protected void initData(Intent intent) {
+
     }
 
     @Override

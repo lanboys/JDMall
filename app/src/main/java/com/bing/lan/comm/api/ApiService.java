@@ -5,7 +5,7 @@ import com.bing.lan.jdmall.bean.BrandResultBean;
 import com.bing.lan.jdmall.bean.CategoryResultBean;
 import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.LoginResultBean;
-import com.bing.lan.jdmall.bean.ProductDetailResultBean;
+import com.bing.lan.jdmall.bean.ProductInfoResultBean;
 import com.bing.lan.jdmall.bean.ProductListResultBean;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
 import com.bing.lan.jdmall.bean.SubCategoryResultBean;
@@ -73,7 +73,7 @@ public interface ApiService {
     Observable<ProductListResultBean> loadProductList(@FieldMap HashMap<String, String> params);
 
     @GET("productInfo")
-    Observable<ProductDetailResultBean> loadProductDetail(@Query("id") int id);
+    Observable<ProductInfoResultBean> loadProductInfo(@Query("id") long id);
     //http://mall.520it.com/productInfo?id=1
 
     // @GET("home")
