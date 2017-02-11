@@ -5,9 +5,11 @@ import com.bing.lan.jdmall.bean.BrandResultBean;
 import com.bing.lan.jdmall.bean.CategoryResultBean;
 import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.LoginResultBean;
+import com.bing.lan.jdmall.bean.ProductListResultBean;
 import com.bing.lan.jdmall.bean.SecKillResultBean;
 import com.bing.lan.jdmall.bean.SubCategoryResultBean;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -61,8 +63,9 @@ public interface ApiService {
     @GET("brand")
     Observable<BrandResultBean> loadBrand(@Query("categoryId") int categoryId);
 
-    // @POST("searchProduct")
-    // Observable<ProductListResultBean> loadProductList(@Query("categoryId") int categoryId);
+    // @FormUrlEncoded
+    @POST("searchProduct")
+    Observable<ProductListResultBean> loadProductList(@QueryMap HashMap<String, String> params);
 
     // @GET("home")
     // Call<ResponseBody> getUrl(@Query("index") long index);

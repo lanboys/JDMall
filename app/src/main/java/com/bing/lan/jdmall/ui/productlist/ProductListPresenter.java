@@ -1,6 +1,9 @@
 package com.bing.lan.jdmall.ui.productlist;
 
 import com.bing.lan.comm.base.mvp.activity.BaseActivityPresenter;
+import com.bing.lan.jdmall.bean.BrandResultBean;
+
+import java.util.List;
 
 /**
  * @author 蓝兵
@@ -17,6 +20,7 @@ public class ProductListPresenter
     @Override
     public void onStart(Object... params) {
         loadData(BRAND_ACTION, params);
+        loadData(PRODUCT_LIST_ACTION, params);
     }
 
     @Override
@@ -26,7 +30,13 @@ public class ProductListPresenter
 
     @Override
     public void onSuccess(int action, Object data) {
-
+        switch (action) {
+            case BRAND_ACTION:
+                mView.updateBrandGridView((List<BrandResultBean.BrandInfo>) data);
+                break;
+            case PRODUCT_LIST_ACTION:
+                break;
+        }
     }
 
     @Override

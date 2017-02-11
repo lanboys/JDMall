@@ -1,10 +1,12 @@
 package com.bing.lan.jdmall.bean;
 
+import java.util.List;
+
 /**
  * @author 蓝兵
  * @time 2017/2/11  12:50
  */
-public class ProductListResultBean extends ResultBean {
+public class ProductListResultBean extends ResultBean<List<ProductListResultBean.ProductListInfo>> {
 
     public static class ProductListInfo {
 
