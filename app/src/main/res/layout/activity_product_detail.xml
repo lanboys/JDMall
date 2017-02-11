@@ -39,12 +39,58 @@
         android:layout_weight="1"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/cussvc_icon"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="客服"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/store_icon"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="店铺"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/fav_icon"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="关注"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="#CC0000"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="add2ShopCar"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="加入购物车"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

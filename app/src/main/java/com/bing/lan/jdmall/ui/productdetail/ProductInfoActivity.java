@@ -1,8 +1,6 @@
 package com.bing.lan.jdmall.ui.productdetail;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,16 +17,13 @@ import com.bing.lan.jdmall.ui.productdetail.introduce.ProductIntroduceFragment;
 
 import butterknife.BindView;
 
-import static com.bing.lan.jdmall.R.id.fab;
-
-public class ProductDetailActivity extends BaseActivity<IProductDetailContract.IProductDetailPresenter>
-        implements IProductDetailContract.IProductDetailView, View.OnClickListener {
+public class ProductInfoActivity extends BaseActivity<IProductInfoContract.IProductInfoPresenter>
+        implements IProductInfoContract.IProductInfoView, View.OnClickListener {
 
     public static final String PID_KEY = "pid";
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(fab)
-    FloatingActionButton mFab;
+
     @BindView(R.id.id_tablayout)
     TabLayout mTabLayout;
     @BindView(R.id.id_viewpager)
@@ -57,13 +52,6 @@ public class ProductDetailActivity extends BaseActivity<IProductDetailContract.I
     protected void initView() {
 
         setToolBar(mToolbar);
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         mTabTitle = AppUtil.getStrArr(R.array.product_tab_title);
         FragmentPagerAdapter productAdapter = new ProductFragmentPagerAdapter(getSupportFragmentManager());

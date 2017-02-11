@@ -142,7 +142,7 @@ public class ProductListModule extends BaseActivityModule
     }
 
     private HashMap<String, String> buildProductListSendParams(
-            SProductListParams paramsBean) { 
+            SProductListParams paramsBean) {
         HashMap<String, String> paramsMap = new HashMap<>();
         paramsMap.put("categoryId", paramsBean.categoryId + "");
         paramsMap.put("filterType", paramsBean.filterType + "");

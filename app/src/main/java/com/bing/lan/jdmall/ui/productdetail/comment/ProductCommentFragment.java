@@ -1,21 +1,32 @@
 package com.bing.lan.jdmall.ui.productdetail.comment;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.bing.lan.comm.base.mvp.fragment.BaseFragment;
+import com.bing.lan.comm.di.FragmentComponent;
 import com.bing.lan.jdmall.R;
 
 /**
- * Created by lean on 16/10/28.
+ *
  */
-
-public class ProductCommentFragment extends Fragment {
+public class ProductCommentFragment extends BaseFragment<IProductCommentContract.IProductCommentPresenter>
+        implements IProductCommentContract.IProductCommentView {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_product_comment, container, false);
+    protected int getLayoutResId() {
+        return R.layout.fragment_product_comment;
+    }
+
+    @Override
+    protected void startInject(FragmentComponent fragmentComponent) {
+        fragmentComponent.inject(this);
+    }
+
+    @Override
+    protected void readyStartPresenter() {
+
+    }
+
+    @Override
+    protected void initView() {
+
     }
 }

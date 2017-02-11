@@ -1,13 +1,13 @@
-package com.bing.lan.jdmall.ui.productdetail;
+package com.bing.lan.jdmall.ui.productdetail.details;
 
 import com.bing.lan.comm.base.mvp.IBaseContract;
-import com.bing.lan.comm.base.mvp.activity.BaseActivityModule;
+import com.bing.lan.comm.base.mvp.fragment.BaseFragmentModule;
 
 /**
  * @author 蓝兵
- * @time 2017/2/6  19:12
+ * @time 2017/2/8  10:26
  */
-public class ProductDetailModule extends BaseActivityModule
+public class ProductDetailModule extends BaseFragmentModule
         implements IProductDetailContract.IProductDetailModule {
 
     @Override

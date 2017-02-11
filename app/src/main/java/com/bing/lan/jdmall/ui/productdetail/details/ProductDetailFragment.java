@@ -1,4 +1,4 @@
-package com.bing.lan.jdmall.ui.productdetail.introduce;
+package com.bing.lan.jdmall.ui.productdetail.details;
 
 import com.bing.lan.comm.base.mvp.fragment.BaseFragment;
 import com.bing.lan.comm.di.FragmentComponent;
@@ -7,12 +7,12 @@ import com.bing.lan.jdmall.R;
 /**
  *
  */
-public class ProductIntroduceFragment extends BaseFragment<IProductIntroduceContract.IProductIntroducePresenter>
-        implements IProductIntroduceContract.IProductIntroduceView {
+public class ProductDetailFragment extends BaseFragment<IProductDetailContract.IProductDetailPresenter>
+        implements IProductDetailContract.IProductDetailView {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_productdetails;
+        return R.layout.fragment_product_details;
     }
 
     @Override

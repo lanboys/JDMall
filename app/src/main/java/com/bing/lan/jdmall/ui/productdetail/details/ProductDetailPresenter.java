@@ -1,13 +1,13 @@
-package com.bing.lan.jdmall.ui.productdetail;
+package com.bing.lan.jdmall.ui.productdetail.details;
 
-import com.bing.lan.comm.base.mvp.activity.BaseActivityPresenter;
+import com.bing.lan.comm.base.mvp.fragment.BaseFragmentPresenter;
 
 /**
  * @author 蓝兵
- * @time 2017/2/6  19:11
+ * @time 2017/2/8  10:27
  */
-public class ProductDetailPresenter
-        extends BaseActivityPresenter<IProductDetailContract.IProductDetailView, IProductDetailContract.IProductDetailModule>
+public class ProductDetailPresenter extends
+        BaseFragmentPresenter<IProductDetailContract.IProductDetailView, IProductDetailContract.IProductDetailModule>
         implements IProductDetailContract.IProductDetailPresenter {
 
     @Override

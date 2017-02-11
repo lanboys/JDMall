@@ -12,10 +12,10 @@ import com.bing.lan.jdmall.ui.main.IMainContract;
 import com.bing.lan.jdmall.ui.main.MainActivity;
 import com.bing.lan.jdmall.ui.main.MainModule;
 import com.bing.lan.jdmall.ui.main.MainPresenter;
-import com.bing.lan.jdmall.ui.productdetail.IProductDetailContract;
-import com.bing.lan.jdmall.ui.productdetail.ProductDetailActivity;
-import com.bing.lan.jdmall.ui.productdetail.ProductDetailModule;
-import com.bing.lan.jdmall.ui.productdetail.ProductDetailPresenter;
+import com.bing.lan.jdmall.ui.productdetail.IProductInfoContract;
+import com.bing.lan.jdmall.ui.productdetail.ProductInfoActivity;
+import com.bing.lan.jdmall.ui.productdetail.ProductInfoModule;
+import com.bing.lan.jdmall.ui.productdetail.ProductInfoPresenter;
 import com.bing.lan.jdmall.ui.productlist.IProductListContract;
 import com.bing.lan.jdmall.ui.productlist.ProductListActivity;
 import com.bing.lan.jdmall.ui.productlist.ProductListModule;
@@ -87,11 +87,11 @@ public class ActivityModule {
     }
 
     @Provides
-    public IProductDetailContract.IProductDetailPresenter provideProductDetailPresenter() {
-        ProductDetailPresenter productDetailPresenter = new ProductDetailPresenter();
-        productDetailPresenter.setModule(new ProductDetailModule());
-        productDetailPresenter.onAttachView((ProductDetailActivity) mActivity);
-        return productDetailPresenter;
+    public IProductInfoContract.IProductInfoPresenter provideProductInfoPresenter() {
+        ProductInfoPresenter productInfoPresenter = new ProductInfoPresenter();
+        productInfoPresenter.setModule(new ProductInfoModule());
+        productInfoPresenter.onAttachView((ProductInfoActivity) mActivity);
+        return productInfoPresenter;
     }
 
     @Provides

@@ -129,10 +129,11 @@ public class ProductListActivity extends
 
     @Override
     protected void readyStartPresenter() {
-        // if (mCategoryId == 0 || mTopCategoryId == 0) {
-        finish();
-            // return;
-        // }
+        if (mCategoryId == 0 || mTopCategoryId == 0) {
+            showToast("暂时没有该条数据");
+            finish();
+            return;
+        }
         mPresenter.onStart(mTopCategoryId, mSendParams);
     }
 
@@ -313,6 +314,7 @@ public class ProductListActivity extends
                 long id) {
             //1.拿到商品的id
             long pId = mProductListAdapter.getItemId(position);
+            log.d("onItemClick(): " + pId);
             //2.跳转到商品详情页
             Intent intent = new Intent(ProductListActivity.this, ProductDetailActivity.class);
             intent.putExtra(ProductDetailActivity.PID_KEY, pId);

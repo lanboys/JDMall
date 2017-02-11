@@ -2,7 +2,7 @@ package com.bing.lan.comm.di;
 
 import com.bing.lan.jdmall.ui.login.LoginActivity;
 import com.bing.lan.jdmall.ui.main.MainActivity;
-import com.bing.lan.jdmall.ui.productdetail.ProductDetailActivity;
+import com.bing.lan.jdmall.ui.productdetail.ProductInfoActivity;
 import com.bing.lan.jdmall.ui.productlist.ProductListActivity;
 import com.bing.lan.jdmall.ui.register.RegisterActivity;
 import com.bing.lan.jdmall.ui.splash.SplashActivity;
@@ -24,8 +24,8 @@ public interface ActivityComponent {
 
     void inject(SplashActivity splashActivity);
 
-    void inject(ProductDetailActivity productDetailActivity);
-
     void inject(ProductListActivity productListActivity);
+
+    void inject(ProductInfoActivity productInfoActivity);
 }
 
