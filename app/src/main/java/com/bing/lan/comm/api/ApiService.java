@@ -14,6 +14,7 @@ import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -63,9 +64,12 @@ public interface ApiService {
     @GET("brand")
     Observable<BrandResultBean> loadBrand(@Query("categoryId") int categoryId);
 
-    // @FormUrlEncoded
+    // @POST("searchProduct")
+    // Observable<ProductListResultBean> loadProductList(@QueryMap HashMap<String, String> params);    // @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST("searchProduct")
-    Observable<ProductListResultBean> loadProductList(@QueryMap HashMap<String, String> params);
+    Observable<ProductListResultBean> loadProductList(@FieldMap HashMap<String, String> params);
 
     // @GET("home")
     // Call<ResponseBody> getUrl(@Query("index") long index);

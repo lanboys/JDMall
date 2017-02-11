@@ -10,7 +10,7 @@ import com.bing.lan.jdmall.R;
 import com.bing.lan.jdmall.bean.ProductListResultBean;
 import com.loopj.android.image.SmartImageView;
 
-public class ProductListAdapter extends JDBaseAdapter<ProductListResultBean.ProductListInfo> {
+public class ProductListAdapter extends JDBaseAdapter<ProductListResultBean.ProductListInfo.ProductInfo> {
 
     public ProductListAdapter(Context context) {
         super(context);
@@ -43,7 +43,7 @@ public class ProductListAdapter extends JDBaseAdapter<ProductListResultBean.Prod
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        ProductListResultBean.ProductListInfo bean = mDatas.get(position);
+        ProductListResultBean.ProductListInfo.ProductInfo bean = mDatas.get(position);
         holder.smiv.setImageUrl(ApiService.BASE_URL + bean.getIconUrl());
         holder.nameTv.setText(bean.getName());
         holder.normalpriceTv.setText(" ¥ " + bean.getPrice() + " ");

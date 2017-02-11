@@ -92,7 +92,7 @@ public class ProductListModule extends BaseActivityModule
                 .filter(new Func1<ProductListResultBean, Boolean>() {
                     @Override
                     public Boolean call(ProductListResultBean bannerResultBean) {
-                        int size = bannerResultBean.getResult().size();
+                        int size = bannerResultBean.getResult().getTotal();
                         if (size > 0) {
                             return true;
                         } else {
@@ -101,18 +101,18 @@ public class ProductListModule extends BaseActivityModule
                         }
                     }
                 })
-                .map(new Func1<ProductListResultBean, List<ProductListResultBean.ProductListInfo>>() {
+                .map(new Func1<ProductListResultBean, List<ProductListResultBean.ProductListInfo.ProductInfo>>() {
                     @Override
-                    public List<ProductListResultBean.ProductListInfo> call(ProductListResultBean brandResultBean) {
-                        return brandResultBean.getResult();
+                    public List<ProductListResultBean.ProductListInfo.ProductInfo> call(ProductListResultBean productListResultBean) {
+                        return productListResultBean.getResult().getRows();
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<ProductListResultBean.ProductListInfo>>() {
+                .subscribe(new Subscriber<List<ProductListResultBean.ProductListInfo.ProductInfo>>() {
 
                     @Override
-                    public void onNext(List<ProductListResultBean.ProductListInfo> data) {
+                    public void onNext(List<ProductListResultBean.ProductListInfo.ProductInfo> data) {
                         listener.onSuccess(action, data);
                         log.d("onNext(): 产品数量" + data.size());
                     }

@@ -1,7 +1,6 @@
 package com.bing.lan.jdmall.ui.productlist;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,7 +24,8 @@ import com.bing.lan.jdmall.bean.ProductListResultBean;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import static com.bing.lan.jdmall.ui.productlist.ProductListPresenter.PRODUCT_LIST_ACTION;
 
 public class ProductListActivity extends
         BaseActivity<IProductListContract.IProductListPresenter>
@@ -143,7 +143,7 @@ public class ProductListActivity extends
     }
 
     @Override
-    public void updateProductList(List<ProductListResultBean.ProductListInfo> datas) {
+    public void updateProductList(List<ProductListResultBean.ProductListInfo.ProductInfo> datas) {
         mProductListAdapter.setDatas(datas);
         mProductListAdapter.notifyDataSetChanged();
     }
@@ -238,8 +238,7 @@ public class ProductListActivity extends
 
     private void calculatorBrand() {
         if (mBrandAdapter.mCurrentTabIndex != -1) {
-            long itemId = mBrandAdapter.getItemId(mBrandAdapter.mCurrentTabIndex);
-            mSendParams.brandId = itemId;
+            mSendParams.brandId = mBrandAdapter.getItemId(mBrandAdapter.mCurrentTabIndex);
         }
     }
 
@@ -274,7 +273,7 @@ public class ProductListActivity extends
                 break;
             // 点击销量
             case R.id.sale_indicator:
-                mSendParams.sortType = SProductListParams.SORTTYPE_SALE;
+                mSendParams.sortType = SProductListParams.SORT_TYPE_SALE;
                 loadData();
                 break;
             // 点击价格排序
@@ -288,7 +287,7 @@ public class ProductListActivity extends
     }
 
     public void loadData() {
-        mPresenter.onStart(mSendParams);
+        mPresenter.loadData(PRODUCT_LIST_ACTION, mSendParams);
     }
 
     //popwindow点击监听事件
@@ -297,20 +296,13 @@ public class ProductListActivity extends
 
         mAllSortTv.setText(text);
         if (text.equals("综合")) {
-            mSendParams.filterType = SProductListParams.FILTERTYPE_ALL;
+            mSendParams.filterType = SProductListParams.FILTER_TYPE_ALL;
         } else if (text.equals("新品")) {
-            mSendParams.filterType = SProductListParams.FILTERTYPE_NEW;
+            mSendParams.filterType = SProductListParams.FILTER_TYPE_NEW;
         } else if (text.equals("评价")) {
-            mSendParams.filterType = SProductListParams.filterType_COMMENT;
+            mSendParams.filterType = SProductListParams.FILTER_TYPE_COMMENT;
         }
         loadData();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     class ProductListItemClickListener implements AdapterView.OnItemClickListener {

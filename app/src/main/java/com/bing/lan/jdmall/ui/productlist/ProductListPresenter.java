@@ -2,6 +2,7 @@ package com.bing.lan.jdmall.ui.productlist;
 
 import com.bing.lan.comm.base.mvp.activity.BaseActivityPresenter;
 import com.bing.lan.jdmall.bean.BrandResultBean;
+import com.bing.lan.jdmall.bean.ProductListResultBean;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class ProductListPresenter
                 mView.updateBrandGridView((List<BrandResultBean.BrandInfo>) data);
                 break;
             case PRODUCT_LIST_ACTION:
+                mView.updateProductList((List<ProductListResultBean.ProductListInfo.ProductInfo>) data);
                 break;
         }
     }

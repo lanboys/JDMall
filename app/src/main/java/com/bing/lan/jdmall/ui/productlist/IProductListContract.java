@@ -12,7 +12,7 @@ public interface IProductListContract {
     interface IProductListView
             extends IBaseActivityContract.IBaseActivityView<IProductListPresenter> {
 
-        void updateProductList(List<ProductListResultBean.ProductListInfo> datas);
+        void updateProductList(List<ProductListResultBean.ProductListInfo.ProductInfo> datas);
 
         void updateBrandGridView(List<BrandResultBean.BrandInfo> datas);
     }

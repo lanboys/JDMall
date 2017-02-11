@@ -6,63 +6,93 @@ import java.util.List;
  * @author 蓝兵
  * @time 2017/2/11  12:50
  */
-public class ProductListResultBean extends ResultBean<List<ProductListResultBean.ProductListInfo>> {
+public class ProductListResultBean extends ResultBean<ProductListResultBean.ProductListInfo> {
 
     public static class ProductListInfo {
 
-        private long id;
-        private String name;
-        private String iconUrl;
-        private double price;
-        private int commentCount;
-        private int favcomRate;
+        private int total;
+        private List<ProductInfo> rows;
 
-        public long getId() {
-            return id;
+        public int getTotal() {
+            return total;
         }
 
-        public void setId(long id) {
-            this.id = id;
+        public void setTotal(int total) {
+            this.total = total;
         }
 
-        public String getName() {
-            return name;
+        public List<ProductInfo> getRows() {
+            return rows;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setRows(List<ProductInfo> rows) {
+            this.rows = rows;
         }
 
-        public String getIconUrl() {
-            return iconUrl;
+        @Override
+        public String toString() {
+            return "ProductListInfo{" +
+                    "rows=" + rows +
+                    ", total=" + total +
+                    '}';
         }
 
-        public void setIconUrl(String iconUrl) {
-            this.iconUrl = iconUrl;
-        }
+        public static class ProductInfo {
 
-        public double getPrice() {
-            return price;
-        }
+            private long id;
+            private String name;
+            private String iconUrl;
+            private double price;
+            private int commentCount;
+            private int favcomRate;
 
-        public void setPrice(double price) {
-            this.price = price;
-        }
+            public long getId() {
+                return id;
+            }
 
-        public int getCommentCount() {
-            return commentCount;
-        }
+            public void setId(long id) {
+                this.id = id;
+            }
 
-        public void setCommentCount(int commentCount) {
-            this.commentCount = commentCount;
-        }
+            public String getName() {
+                return name;
+            }
 
-        public int getFavcomRate() {
-            return favcomRate;
-        }
+            public void setName(String name) {
+                this.name = name;
+            }
 
-        public void setFavcomRate(int favcomRate) {
-            this.favcomRate = favcomRate;
+            public String getIconUrl() {
+                return iconUrl;
+            }
+
+            public void setIconUrl(String iconUrl) {
+                this.iconUrl = iconUrl;
+            }
+
+            public double getPrice() {
+                return price;
+            }
+
+            public void setPrice(double price) {
+                this.price = price;
+            }
+
+            public int getCommentCount() {
+                return commentCount;
+            }
+
+            public void setCommentCount(int commentCount) {
+                this.commentCount = commentCount;
+            }
+
+            public int getFavcomRate() {
+                return favcomRate;
+            }
+
+            public void setFavcomRate(int favcomRate) {
+                this.favcomRate = favcomRate;
+            }
         }
     }
-}
+    }
