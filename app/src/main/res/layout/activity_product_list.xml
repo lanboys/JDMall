@@ -223,7 +223,7 @@
                 android:textSize="18sp" />
 
             <GridView
-                android:id="@+id/gv"
+                android:id="@+id/brand_gv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFF"

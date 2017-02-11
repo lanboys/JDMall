@@ -34,7 +34,7 @@ public abstract class AbsRefreshPresenter<DATA, LISTVIEWBEAN>
     private int mNextLoadMoreDataUrlIndex = 0;
 
     @Override
-    public void onStart() {
+    public void onStart(Object... params) {
         if (!mIsListViewHaveData) {
             mView.setViewState2LoadPage(LoadPageView.LoadDataResult.LOAD_LOADING);
             // //重新点击进入页面,重置错误计数为0

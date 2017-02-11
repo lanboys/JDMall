@@ -11,7 +11,7 @@ public class ProductDetailPresenter
         implements IProductDetailContract.IProductDetailPresenter {
 
     @Override
-    public void onStart() {
+    public void onStart(Object... params) {
 
     }
 

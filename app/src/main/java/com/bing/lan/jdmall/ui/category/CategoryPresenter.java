@@ -21,7 +21,7 @@ public class CategoryPresenter extends
     private boolean mIsListViewHaveData = false;
 
     @Override
-    public void onStart() {
+    public void onStart(Object... params) {
 
         if (!mIsListViewHaveData) {
             mView.setViewState2LoadPage(LoadPageView.LoadDataResult.LOAD_LOADING);

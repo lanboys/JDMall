@@ -30,11 +30,13 @@ public interface IBaseContract {
 
         void onDetachView();
 
-        void onStart();
+        void onStart(Object... params);
 
         void setModule(M module);
 
         void loadImage(Object path, ImageView imageView);
+
+        void loadData(int action, Object... parameter);
     }
 
     interface IBaseModule {

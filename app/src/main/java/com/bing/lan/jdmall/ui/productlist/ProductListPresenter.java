@@ -11,9 +11,17 @@ public class ProductListPresenter
         IProductListContract.IProductListModule>
         implements IProductListContract.IProductListPresenter {
 
-    @Override
-    public void onStart() {
+    public static final int BRAND_ACTION = 11;
+    public static final int PRODUCT_LIST_ACTION = 12;
 
+    @Override
+    public void onStart(Object... params) {
+        loadData(BRAND_ACTION, params);
+    }
+
+    @Override
+    public void loadData(int action, Object... parameter) {
+        mModule.loadData(action, this, parameter);
     }
 
     @Override

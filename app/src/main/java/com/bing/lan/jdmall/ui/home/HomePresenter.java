@@ -35,7 +35,7 @@ public class HomePresenter extends
     }
 
     @Override
-    public void onStart() {
+    public void onStart(Object... params) {
         mView.setViewState2LoadPage(LoadPageView.LoadDataResult.LOAD_SUCCESS);
         updateData();
     }

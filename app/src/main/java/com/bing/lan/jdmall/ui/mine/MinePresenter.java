@@ -21,7 +21,7 @@ public class MinePresenter extends
 
 
     @Override
-    public void onStart() {
+    public void onStart(Object... params) {
         LoginResultBean.UserInfoBean userInfoBean = AppUtil.getGlobal(Constants.USER_INFO);
         if (userInfoBean != null) {
             mView.updateViewData(userInfoBean);

@@ -11,7 +11,7 @@ public class RegisterPresenter
         implements IRegisterContract.IRegisterPresenter<IRegisterContract.IRegisterView, IRegisterContract.IRegisterModule> {
 
     @Override
-    public void onStart() {
+    public void onStart(Object... params) {
 
     }
 

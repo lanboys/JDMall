@@ -10,7 +10,7 @@ public class MainPresenter extends BaseActivityPresenter<IMainContract.IMainView
         implements IMainContract.IMainPresenter<IMainContract.IMainView, IMainContract.IMainModule> {
 
     @Override
-    public void onStart() {
+    public void onStart(Object... params) {
 
     }
 

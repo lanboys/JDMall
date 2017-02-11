@@ -1,5 +1,6 @@
 package com.bing.lan.comm.base.mvp.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -60,8 +61,14 @@ public abstract class BaseActivity<T extends IBaseActivityPresenter>
         startInject(getActivityComponent());
         //初始化View
         initView();
+        //初始化数据
+        initData(getIntent());
         //获取权限
         requestPermissions();
+    }
+
+    protected void initData(Intent intent) {
+
     }
 
     @Override

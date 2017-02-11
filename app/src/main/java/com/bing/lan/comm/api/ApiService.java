@@ -1,6 +1,7 @@
 package com.bing.lan.comm.api;
 
 import com.bing.lan.jdmall.bean.BannerResultBean;
+import com.bing.lan.jdmall.bean.BrandResultBean;
 import com.bing.lan.jdmall.bean.CategoryResultBean;
 import com.bing.lan.jdmall.bean.GetYourLikeResultBean;
 import com.bing.lan.jdmall.bean.LoginResultBean;
@@ -56,6 +57,12 @@ public interface ApiService {
 
     @GET("category")
     Observable<SubCategoryResultBean> loadCategory(@Query("parentId") String parentId);
+
+    @GET("brand")
+    Observable<BrandResultBean> loadBrand(@Query("categoryId") int categoryId);
+
+    // @POST("searchProduct")
+    // Observable<ProductListResultBean> loadProductList(@Query("categoryId") int categoryId);
 
     // @GET("home")
     // Call<ResponseBody> getUrl(@Query("index") long index);

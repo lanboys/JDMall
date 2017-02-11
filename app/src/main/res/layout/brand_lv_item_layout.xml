@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/brand_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/pay_money_choose_bg"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="5dp"
+        android:textColor="@drawable/choose_productlist_service_txtbg"
+        android:textSize="14sp"/>
+
+</LinearLayout>

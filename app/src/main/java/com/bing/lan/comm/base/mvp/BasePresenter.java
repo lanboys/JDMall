@@ -34,7 +34,13 @@ public abstract class BasePresenter<
         mView = null;
     }
 
+    @Override
     public void loadImage(Object path, ImageView imageView) {
         mModule.loadImage(path, imageView);
+    }
+
+    @Override
+    public void loadData(int action, Object... parameter) {
+
     }
 }

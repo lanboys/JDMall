@@ -20,7 +20,7 @@ public class LoginPresenter
     private String mPsd;
 
     @Override
-    public void onStart() {
+    public void onStart(Object... params) {
         mModule.queryUserInfo(QUERY_USERINFO_ACTION, this);
     }
 

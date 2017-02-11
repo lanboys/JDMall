@@ -11,7 +11,7 @@ public class SplashPresenter
         implements ISplashContract.ISplashPresenter<ISplashContract.ISplashView, ISplashContract.ISplashModule> {
 
     @Override
-    public void onStart() {
+    public void onStart(Object... params) {
         mView.startAnimation();
     }
 
