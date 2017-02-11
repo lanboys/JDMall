@@ -16,6 +16,10 @@ import com.bing.lan.jdmall.ui.productdetail.IProductDetailContract;
 import com.bing.lan.jdmall.ui.productdetail.ProductDetailActivity;
 import com.bing.lan.jdmall.ui.productdetail.ProductDetailModule;
 import com.bing.lan.jdmall.ui.productdetail.ProductDetailPresenter;
+import com.bing.lan.jdmall.ui.productlist.IProductListContract;
+import com.bing.lan.jdmall.ui.productlist.ProductListActivity;
+import com.bing.lan.jdmall.ui.productlist.ProductListModule;
+import com.bing.lan.jdmall.ui.productlist.ProductListPresenter;
 import com.bing.lan.jdmall.ui.register.IRegisterContract;
 import com.bing.lan.jdmall.ui.register.RegisterActivity;
 import com.bing.lan.jdmall.ui.register.RegisterModule;
@@ -88,6 +92,14 @@ public class ActivityModule {
         productDetailPresenter.setModule(new ProductDetailModule());
         productDetailPresenter.onAttachView((ProductDetailActivity) mActivity);
         return productDetailPresenter;
+    }
+
+    @Provides
+    public IProductListContract.IProductListPresenter provideProductListPresenter() {
+        ProductListPresenter productListPresenter = new ProductListPresenter();
+        productListPresenter.setModule(new ProductListModule());
+        productListPresenter.onAttachView((ProductListActivity) mActivity);
+        return productListPresenter;
     }
 
     @Provides

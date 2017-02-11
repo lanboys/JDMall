@@ -23,6 +23,7 @@ import static com.bing.lan.jdmall.R.id.fab;
 public class ProductDetailActivity extends BaseActivity<IProductDetailContract.IProductDetailPresenter>
         implements IProductDetailContract.IProductDetailView, View.OnClickListener {
 
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(fab)
@@ -52,6 +53,7 @@ public class ProductDetailActivity extends BaseActivity<IProductDetailContract.I
 
     @Override
     protected void initView() {
+
         setToolBar(mToolbar);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override

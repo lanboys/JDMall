@@ -87,7 +87,7 @@
 
         <include layout="@layout/divider_layout" />
 
-        <com.m520it.jdmall.ui.FlexiListView
+        <com.bing.lan.comm.view.FlexiListView
             android:id="@+id/product_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -101,7 +101,7 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <com.m520it.jdmall.ui.FlexiScrollView
+    <com.bing.lan.comm.view.FlexiScrollView
         android:id="@+id/slide_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -260,7 +260,7 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="18sp" />
         </LinearLayout>
-    </com.m520it.jdmall.ui.FlexiScrollView>
+    </com.bing.lan.comm.view.FlexiScrollView>
 
 </android.support.v4.widget.DrawerLayout>
 

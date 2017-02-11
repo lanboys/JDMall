@@ -5,6 +5,8 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.bing.lan.comm.base.BaseViewHolder;
+import com.bing.lan.comm.utils.AppUtil;
+import com.bing.lan.comm.utils.FixedViewUtil;
 import com.bing.lan.jdmall.R;
 import com.bing.lan.jdmall.bean.SubCategoryResultBean;
 
@@ -29,5 +31,11 @@ public class CategoryViewHolder extends BaseViewHolder<SubCategoryResultBean.Sub
     public void refreshViewData(SubCategoryResultBean.SubCategoryInfoBean bean, int position) {
         log.d("refreshViewData(): " + bean.toString());
         mSubcategoryName.setText(bean.getName());
+
+        CategroyGvAdapter adapter = new CategroyGvAdapter(AppUtil.getAppContext());
+        mSubcategoryLv.setAdapter(adapter);
+        adapter.setDatas(bean.getThirdCategory());
+        adapter.notifyDataSetChanged();
+        FixedViewUtil.setGridViewHeightBasedOnChildren(mSubcategoryLv, 3);
     }
 }
