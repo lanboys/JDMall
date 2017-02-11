@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bing.lan.comm.api.ApiService;
+import com.bing.lan.comm.utils.AppUtil;
 import com.bing.lan.jdmall.R;
 import com.bing.lan.jdmall.adapter.JDBaseAdapter;
 import com.bing.lan.jdmall.bean.SubCategoryResultBean;
@@ -14,6 +15,7 @@ import com.bing.lan.jdmall.ui.productlist.ProductListActivity;
 import com.loopj.android.image.SmartImageView;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static com.bing.lan.jdmall.ui.category.CategoryFragment.CURRENT_TOPCATEGORY_BRAND_ID;
 
 public class CategroyGvAdapter extends
         JDBaseAdapter<SubCategoryResultBean.SubCategoryInfoBean.ThirdCategoryBean> implements View.OnClickListener {
@@ -53,7 +55,13 @@ public class CategroyGvAdapter extends
         Context context = v.getContext();
         Intent intent = new Intent(context, ProductListActivity.class);
         intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+        //此id是用来获取商品列表的
         intent.putExtra(ProductListActivity.CATEGORYID_KEY, (Integer) v.getTag());
+
+        //此id是用来获取品牌信息的
+        int brandId = AppUtil.getGlobal(CURRENT_TOPCATEGORY_BRAND_ID);
+
+        intent.putExtra(ProductListActivity.TOP_CATEGORYID_KEY, brandId);
         context.startActivity(intent);
     }
 

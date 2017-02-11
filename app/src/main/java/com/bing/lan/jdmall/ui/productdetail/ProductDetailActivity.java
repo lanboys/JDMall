@@ -1,5 +1,6 @@
 package com.bing.lan.jdmall.ui.productdetail;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -23,7 +24,7 @@ import static com.bing.lan.jdmall.R.id.fab;
 public class ProductDetailActivity extends BaseActivity<IProductDetailContract.IProductDetailPresenter>
         implements IProductDetailContract.IProductDetailView, View.OnClickListener {
 
-
+    public static final String PID_KEY = "pid";
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(fab)
@@ -35,6 +36,7 @@ public class ProductDetailActivity extends BaseActivity<IProductDetailContract.I
 
     private int mTabCount = 3;
     private String[] mTabTitle;
+    private long mProductId;
 
     @Override
     protected int getLayoutResId() {
@@ -70,7 +72,16 @@ public class ProductDetailActivity extends BaseActivity<IProductDetailContract.I
     }
 
     @Override
+    protected void initData(Intent intent) {
+        //1.拿到商品的id
+        mProductId = intent.getLongExtra(PID_KEY, 0);
+    }
+
+    @Override
     protected void readyStartPresenter() {
+        if (mProductId == 0) {
+            // finish();
+        }
     }
 
     @Override

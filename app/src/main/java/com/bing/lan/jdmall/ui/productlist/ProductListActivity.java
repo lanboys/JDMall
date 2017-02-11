@@ -20,6 +20,7 @@ import com.bing.lan.jdmall.adapter.BrandAdapter;
 import com.bing.lan.jdmall.adapter.ProductListAdapter;
 import com.bing.lan.jdmall.bean.BrandResultBean;
 import com.bing.lan.jdmall.bean.ProductListResultBean;
+import com.bing.lan.jdmall.ui.productdetail.ProductDetailActivity;
 
 import java.util.List;
 
@@ -120,6 +121,7 @@ public class ProductListActivity extends
     protected void initData(Intent intent) {
 
         mCategoryId = intent.getIntExtra(CATEGORYID_KEY, 0);
+        mTopCategoryId = intent.getIntExtra(TOP_CATEGORYID_KEY, 0);
         //初始化参数包装类
         mSendParams = new SProductListParams();
         mSendParams.categoryId = mCategoryId;
@@ -127,12 +129,11 @@ public class ProductListActivity extends
 
     @Override
     protected void readyStartPresenter() {
-        if (mCategoryId == 0 || mTopCategoryId == 0) {
-            // finish();
+        // if (mCategoryId == 0 || mTopCategoryId == 0) {
+        finish();
             // return;
-        }
-
-        mPresenter.onStart(mSendParams);
+        // }
+        mPresenter.onStart(mTopCategoryId, mSendParams);
     }
 
     @Override
@@ -310,12 +311,12 @@ public class ProductListActivity extends
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                 long id) {
-            // //1.拿到商品的id
-            // long pId = mProductListAdapter.getItemId(position);
-            // //2.跳转到商品详情页
-            // Intent intent=new Intent(ProductListActivity.this,ProductDetailActivity.class);
-            // intent.putExtra(ProductDetailActivity.PID_KEY, pId);
-            // startActivity(intent);
+            //1.拿到商品的id
+            long pId = mProductListAdapter.getItemId(position);
+            //2.跳转到商品详情页
+            Intent intent = new Intent(ProductListActivity.this, ProductDetailActivity.class);
+            intent.putExtra(ProductDetailActivity.PID_KEY, pId);
+            startActivity(intent);
         }
     }
 }

@@ -16,14 +16,6 @@ public class ProductListAdapter extends JDBaseAdapter<ProductListResultBean.Prod
         super(context);
     }
 
-    class ViewHolder {
-
-        SmartImageView smiv;
-        TextView nameTv;
-        TextView normalpriceTv;
-        TextView commrateTv;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
@@ -53,8 +45,19 @@ public class ProductListAdapter extends JDBaseAdapter<ProductListResultBean.Prod
         return convertView;
     }
 
+    /**
+     * 获取商品的id
+     */
     @Override
     public long getItemId(int position) {
         return mDatas != null ? mDatas.get(position).getId() : 0;
+    }
+
+    class ViewHolder {
+
+        SmartImageView smiv;
+        TextView nameTv;
+        TextView normalpriceTv;
+        TextView commrateTv;
     }
 }

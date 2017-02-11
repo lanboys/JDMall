@@ -2,6 +2,7 @@ package com.bing.lan.jdmall.ui.productlist;
 
 import com.bing.lan.comm.base.mvp.IBaseContract;
 import com.bing.lan.comm.base.mvp.activity.BaseActivityModule;
+import com.bing.lan.comm.utils.RxJavaUtils;
 import com.bing.lan.jdmall.bean.BrandResultBean;
 import com.bing.lan.jdmall.bean.ProductListResultBean;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -24,13 +26,22 @@ import static com.bing.lan.jdmall.ui.productlist.ProductListPresenter.PRODUCT_LI
 public class ProductListModule extends BaseActivityModule
         implements IProductListContract.IProductListModule {
 
+    private Subscription mBrandSubscribe;
+    private Subscription mProductListSubscribe;
+
+    @Override
+    public void releaseTask() {
+        RxJavaUtils.releaseSubscribe(mBrandSubscribe);
+        RxJavaUtils.releaseSubscribe(mProductListSubscribe);
+    }
+
     @Override
     public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
         switch (action) {
 
             case BRAND_ACTION:
                 log.d("loadData():BRAND_ACTION " + "加载品牌信息" + parameter);
-                loadBrand(action, listener, ((SProductListParams) parameter[0]).categoryId);
+                loadBrand(action, listener, (int) parameter[0]);
 
                 break;
             case PRODUCT_LIST_ACTION:
@@ -43,7 +54,7 @@ public class ProductListModule extends BaseActivityModule
     @Override
     public void loadBrand(final int action, final IBaseContract.OnDataChangerListener listener, int categoryId) {
 
-        mApiService.loadBrand(categoryId)
+        mBrandSubscribe = mApiService.loadBrand(categoryId)
                 .filter(new Func1<BrandResultBean, Boolean>() {
                     @Override
                     public Boolean call(BrandResultBean bannerResultBean) {
@@ -88,7 +99,7 @@ public class ProductListModule extends BaseActivityModule
     @Override
     public void loadProductList(final int action, final IBaseContract.OnDataChangerListener listener, SProductListParams paramsBean) {
         HashMap<String, String> hashMap = buildProductListSendParams(paramsBean);
-        mApiService.loadProductList(hashMap)
+        mProductListSubscribe = mApiService.loadProductList(hashMap)
                 .filter(new Func1<ProductListResultBean, Boolean>() {
                     @Override
                     public Boolean call(ProductListResultBean bannerResultBean) {
@@ -131,7 +142,7 @@ public class ProductListModule extends BaseActivityModule
     }
 
     private HashMap<String, String> buildProductListSendParams(
-            SProductListParams paramsBean) {
+            SProductListParams paramsBean) { 
         HashMap<String, String> paramsMap = new HashMap<>();
         paramsMap.put("categoryId", paramsBean.categoryId + "");
         paramsMap.put("filterType", paramsBean.filterType + "");

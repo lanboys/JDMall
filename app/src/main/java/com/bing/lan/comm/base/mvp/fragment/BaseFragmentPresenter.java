@@ -30,6 +30,7 @@ public abstract   class BaseFragmentPresenter<
     }
     @Override
     public void stopUpdate() {
+        mModule.releaseTask();
 
     }
 

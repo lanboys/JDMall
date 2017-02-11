@@ -22,6 +22,7 @@ public interface IBaseContract {
         void startActivity(Class<? extends BaseActivity> clazz, boolean isFinish);
 
         void startActivity(Class<? extends BaseActivity> clazz);
+
     }
 
     interface IBasePresenter<T extends IBaseView, M extends IBaseModule> extends OnDataChangerListener {
@@ -40,6 +41,8 @@ public interface IBaseContract {
     }
 
     interface IBaseModule {
+
+        void releaseTask();
 
         void loadImage(Object path, ImageView imageView);
 

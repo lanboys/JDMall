@@ -23,18 +23,23 @@ public class CategoryModule extends BaseModule
         implements ICategoryContract.ICategoryModule {
 
     @Override
+    public void releaseTask() {
+
+    }
+
+    @Override
     public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
         switch (action) {
             case LOAD_TOP_CATEGORYINFO:
                 loadCategory(action, listener);
                 break;
             case LOAD_SUB_CATEGORYINFO:
-                loadSubCategory(action, listener, (String) parameter[0]);
+                loadSubCategory(action, listener, (Integer) parameter[0]);
                 break;
         }
     }
 
-    private void loadSubCategory(final int action, final IBaseContract.OnDataChangerListener listener, String parentId) {
+    private void loadSubCategory(final int action, final IBaseContract.OnDataChangerListener listener, Integer parentId) {
         mApiService.loadCategory(parentId)
                 .filter(new Func1<SubCategoryResultBean, Boolean>() {
                     @Override

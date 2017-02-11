@@ -19,6 +19,10 @@ import rx.schedulers.Schedulers;
  */
 public class LoginModule extends BaseActivityModule implements ILoginContract.ILoginModule {
 
+    @Override
+    public void releaseTask() {
+
+    }
 
     @Override
     public void login(final int action, String username, String psd, final IBaseContract.OnDataChangerListener listener) {

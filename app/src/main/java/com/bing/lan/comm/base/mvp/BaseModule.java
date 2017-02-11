@@ -30,6 +30,13 @@ public abstract class BaseModule implements IBaseContract.IBaseModule {
                 .inject(this);
     }
 
+    // @Override
+    // public void releaseTask() {
+    //
+    //
+    // }
+
+    @Override
     public void loadImage(Object path, ImageView imageView) {
         // Picasso.with(AppUtil.getAppContext()).load((String) path).into(imageView);
         //Glide可以加载 path 为object的路径,比图本地资源文件  R.mipmap.ic_launcher

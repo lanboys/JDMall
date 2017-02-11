@@ -23,6 +23,11 @@ public class HomeModule extends BaseFragmentModule
         implements IHomeContract.IHomeModule {
 
     @Override
+    public void releaseTask() {
+
+    }
+
+    @Override
     public void loadBanner(final int action, int adKind, final IBaseContract.OnDataChangerListener listener) {
         mApiService.loadBanner(adKind)
                 .filter(new Func1<BannerResultBean, Boolean>() {

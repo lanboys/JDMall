@@ -59,7 +59,7 @@ public interface ApiService {
     Observable<CategoryResultBean> loadCategory();
 
     @GET("category")
-    Observable<SubCategoryResultBean> loadCategory(@Query("parentId") String parentId);
+    Observable<SubCategoryResultBean> loadCategory(@Query("parentId") int parentId);
 
     @GET("brand")
     Observable<BrandResultBean> loadBrand(@Query("categoryId") int categoryId);

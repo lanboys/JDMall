@@ -11,7 +11,7 @@ import com.bing.lan.comm.utils.LogUtil;
 public abstract class BasePresenter<
         T extends IBaseContract.IBaseView,
         M extends IBaseContract.IBaseModule>
-        implements IBaseContract.IBasePresenter<T,M>{
+        implements IBaseContract.IBasePresenter<T, M> {
 
     protected LogUtil log = LogUtil.getLogUtil(getClass(), 1);
 
@@ -31,6 +31,7 @@ public abstract class BasePresenter<
 
     @Override
     public void onDetachView() {
+        mModule.releaseTask();
         mView = null;
     }
 

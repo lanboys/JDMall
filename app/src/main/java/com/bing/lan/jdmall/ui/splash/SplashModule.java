@@ -11,6 +11,11 @@ public class SplashModule extends BaseActivityModule
         implements ISplashContract.ISplashModule {
 
     @Override
+    public void releaseTask() {
+
+    }
+
+    @Override
     public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
 
     }

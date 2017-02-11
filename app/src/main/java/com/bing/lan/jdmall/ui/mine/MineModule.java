@@ -17,6 +17,11 @@ public class MineModule extends BaseFragmentModule
     }
 
     @Override
+    public void releaseTask() {
+
+    }
+
+    @Override
     public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
 
     }

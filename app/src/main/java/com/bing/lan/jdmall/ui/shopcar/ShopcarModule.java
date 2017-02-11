@@ -11,6 +11,11 @@ public class ShopcarModule extends BaseFragmentModule
         implements IShopcarContract.IShopcarModule {
 
     @Override
+    public void releaseTask() {
+
+    }
+
+    @Override
     public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
 
     }

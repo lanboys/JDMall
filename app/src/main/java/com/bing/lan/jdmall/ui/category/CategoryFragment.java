@@ -16,6 +16,7 @@ import com.bing.lan.comm.api.ApiService;
 import com.bing.lan.comm.base.BaseViewHolder;
 import com.bing.lan.comm.base.mvp.fragment.BaseFragment;
 import com.bing.lan.comm.di.FragmentComponent;
+import com.bing.lan.comm.utils.AppUtil;
 import com.bing.lan.comm.utils.CastUtil;
 import com.bing.lan.comm.utils.ToastUtil;
 import com.bing.lan.jdmall.R;
@@ -43,6 +44,7 @@ public class CategoryFragment
         SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener,
         AdapterView.OnItemClickListener {
 
+    public static String CURRENT_TOPCATEGORY_BRAND_ID = "CURRENT_TOPCATEGORY_BRAND_ID";
     @BindView(R.id.pull_refresh_view)
     protected SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.lv_refresh)
@@ -178,6 +180,9 @@ public class CategoryFragment
         mPresenter.loadData(LOAD_SUB_CATEGORYINFO, topCategoryInfoBean.getId());
 
         updateBanner(topCategoryInfoBean);
+
+        //将当前页id缓存到全局变量中
+        AppUtil.putGlobal(CURRENT_TOPCATEGORY_BRAND_ID, topCategoryInfoBean.getId());
 
         ToastUtil.showToast(getActivity(), titles.get(v.getId()));
         changeTextColor(v.getId());

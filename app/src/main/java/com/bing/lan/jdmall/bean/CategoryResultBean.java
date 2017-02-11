@@ -18,7 +18,7 @@ public class CategoryResultBean extends ResultBean<List<CategoryResultBean.TopCa
          * name : 分类名称
          */
 
-        private String id;
+        private int id;
         private String bannerUrl;
         private String name;
 
@@ -27,11 +27,11 @@ public class CategoryResultBean extends ResultBean<List<CategoryResultBean.TopCa
             return new Gson().fromJson(str, TopCategoryInfoBean.class);
         }
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
 

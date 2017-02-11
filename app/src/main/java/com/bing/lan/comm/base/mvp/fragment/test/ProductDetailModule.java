@@ -11,6 +11,11 @@ public class ProductDetailModule extends BaseActivityModule
         implements IProductDetailContract.IProductDetailModule {
 
     @Override
+    public void releaseTask() {
+
+    }
+
+    @Override
     public void loadData(int action, IBaseContract.OnDataChangerListener listener, Object... parameter) {
 
     }

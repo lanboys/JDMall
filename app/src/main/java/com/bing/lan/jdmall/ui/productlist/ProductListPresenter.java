@@ -20,8 +20,8 @@ public class ProductListPresenter
 
     @Override
     public void onStart(Object... params) {
-        loadData(BRAND_ACTION, params);
-        loadData(PRODUCT_LIST_ACTION, params);
+        loadData(BRAND_ACTION, params[0]);
+        loadData(PRODUCT_LIST_ACTION, params[1]);
     }
 
     @Override

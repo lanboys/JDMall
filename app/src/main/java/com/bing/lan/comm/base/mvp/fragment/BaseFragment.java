@@ -63,8 +63,6 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
         readyStartPresenter();
     }
 
-    protected abstract void readyStartPresenter();
-
     @Override
     public void onStop() {
         super.onStop();
@@ -87,6 +85,22 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
 
         AppUtil.MemoryLeakCheck(this);
     }
+
+    /**
+     * 停止更新,释放一些正在进行的任务
+     */
+    public void stopUpdate() {
+        if (mPresenter != null)
+            mPresenter.stopUpdate();
+    }
+
+    @Override
+    public void reStartUpdate() {
+        if (mPresenter != null)
+            mPresenter.reStartUpdate();
+    }
+
+    protected abstract void readyStartPresenter();
 
     private void initWindowUI(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mLoadPage == null) {
@@ -113,24 +127,9 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
             mViewBind = ButterKnife.bind(this, mLoadPage);
             //            mViewBind = ButterKnife.bind(mLoadPage);
         }
-
     }
 
     protected abstract void initView();
-
-    /**
-     * 停止更新,释放一些正在进行的任务
-     */
-    public void stopUpdate() {
-        if (mPresenter != null)
-            mPresenter.stopUpdate();
-    }
-
-    @Override
-    public void reStartUpdate() {
-        if (mPresenter != null)
-            mPresenter.reStartUpdate();
-    }
 
     protected FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder()
