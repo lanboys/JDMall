@@ -1,6 +1,7 @@
 package com.bing.lan.jdmall.ui.productdetail.introduce;
 
 import com.bing.lan.comm.base.mvp.fragment.IBaseFragmentContract;
+import com.bing.lan.jdmall.bean.ProductInfoResultBean;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface IProductIntroduceContract {
     interface IProductIntroduceView extends IBaseFragmentContract.IBaseFragmentView<IProductIntroducePresenter> {
 
         void updateBanner(List<String> imageUrls);
+
+        void updateData(ProductInfoResultBean.ProductInfo data);
     }
 
     interface IProductIntroducePresenter extends

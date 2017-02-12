@@ -10,6 +10,7 @@ import com.bing.lan.comm.base.mvp.fragment.BaseFragment;
 import com.bing.lan.comm.di.FragmentComponent;
 import com.bing.lan.comm.view.LoadPageView;
 import com.bing.lan.jdmall.R;
+import com.bing.lan.jdmall.bean.ProductInfoResultBean;
 import com.bing.lan.jdmall.ui.productdetail.ProductInfoActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -26,8 +27,10 @@ public class ProductIntroduceFragment extends
         BaseFragment<IProductIntroduceContract.IProductIntroducePresenter>
         implements IProductIntroduceContract.IProductIntroduceView {
 
+
     @BindView(R.id.introduce_banner)
     Banner mBanner;
+
     private long mProductId;
 
     @Override
@@ -53,7 +56,7 @@ public class ProductIntroduceFragment extends
 
     @Override
     protected void initView() {
-        //设置图片加载器(低版本没有此方法)
+        // 设置图片加载器(低版本没有此方法)
         mBanner.setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
@@ -79,5 +82,23 @@ public class ProductIntroduceFragment extends
             mBanner.setVisibility(View.VISIBLE);
             mBanner.start();
         }
+    }
+
+    @Override
+    public void updateData(ProductInfoResultBean.ProductInfo bean) {
+
+        //加载商品的图片
+        updateBanner(bean.getImgUrls());
+
+        log.d("updateData(): " + bean.toString());
+
+
+
+
+
+
+
+
+
     }
 }

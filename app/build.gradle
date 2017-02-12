@@ -75,4 +75,6 @@ dependencies {
 
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    compile 'com.jakewharton:disklrucache:2.0.2'//缓存
 }

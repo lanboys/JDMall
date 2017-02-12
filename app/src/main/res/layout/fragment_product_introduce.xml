@@ -10,31 +10,6 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:orientation="vertical">
-        <!-- 商品图片展示模块 -->
-        <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="360dp" >-->
-
-        <!--<android.support.v4.view.ViewPager-->
-        <!--android:id="@+id/asvp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="320dp"-->
-        <!--android:scaleType="fitCenter" />-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/vp_indic_tv"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginBottom="15dp"-->
-        <!--android:layout_marginRight="15dp"-->
-        <!--android:background="@drawable/pro_introl_icon_indic_bg"-->
-        <!--android:gravity="center"-->
-        <!--android:textColor="#FFFF"-->
-        <!--android:textSize="18sp"-->
-        <!--android:textStyle="bold" />-->
-        <!--</RelativeLayout>-->
 
         <com.youth.banner.Banner
             android:id="@+id/introduce_banner"

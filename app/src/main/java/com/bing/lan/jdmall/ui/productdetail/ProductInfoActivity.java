@@ -61,7 +61,10 @@ public class ProductInfoActivity extends BaseActivity<IProductInfoContract.IProd
 
     private void initFragment() {
         mFragments = new ArrayList<>();
-        mFragments.add(new ProductIntroduceFragment());
+        ProductIntroduceFragment introduceFragment = new ProductIntroduceFragment();
+        introduceFragment.setAllowEnterTransitionOverlap(true);
+
+        mFragments.add(introduceFragment);
         // mFragments.add(new ProductDetailFragment());
         // mFragments.add(new ProductCommentFragment());
         mFragments.add(new SampleFragment());

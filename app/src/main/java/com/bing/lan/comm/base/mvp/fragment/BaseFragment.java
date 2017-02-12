@@ -63,12 +63,9 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
 
         //初始化数据
         initData(getActivity().getIntent());
+        // initData(getArguments());
         //准备启动p层逻辑
         readyStartPresenter();
-    }
-
-    protected void initData(Intent intent) {
-
     }
 
     @Override
@@ -92,6 +89,10 @@ public abstract class BaseFragment<T extends IBaseFragmentContract.IBaseFragment
         }
 
         AppUtil.MemoryLeakCheck(this);
+    }
+
+    protected void initData(Intent intent) {
+
     }
 
     /**
